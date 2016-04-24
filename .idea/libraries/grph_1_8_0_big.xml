@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="grph-1.8.0-big">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/impl/lib/grph-1.8.0-big.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/impl/lib/grph-1.8.0-big.jar!/javadocs" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/impl/lib/grph-1.8.0-big.jar!/" />
+    </SOURCES>
+  </library>
+</component>
