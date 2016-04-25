@@ -1,10 +1,9 @@
 package tests;
 
-import algorithms.Utils;
+import algorithms.helper.InstanceFinder;
 import graph.StringEdge;
 import graph.StringVertex;
 import org.jgrapht.DirectedGraph;
-import org.jgrapht.Graph;
 
 import java.util.List;
 
@@ -17,8 +16,8 @@ public class FindInstancesCompress_example {
         DirectedGraph<StringVertex, StringEdge> s = TestUtils.createCompressSubstructure2();
 
 
-        List<Graph<StringVertex, StringEdge>> instances = Utils.findInstances(g, s);
-        for (Graph<StringVertex, StringEdge> instance : instances) {
+        List<DirectedGraph<StringVertex, StringEdge>> instances = InstanceFinder.findInstances(g, s);
+        for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
             System.out.println(instance);
         }
 

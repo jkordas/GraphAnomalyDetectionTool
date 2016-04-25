@@ -1,4 +1,4 @@
-package algorithms.utils;
+package algorithms.helper;
 
 import graph.StringEdge;
 import graph.StringVertex;
@@ -14,8 +14,9 @@ public class IsomorphismDetector {
     private static EquivalenceComparator<StringVertex, Graph<StringVertex, StringEdge>> vertexComparator = new
             EquivalenceComparator<StringVertex, Graph<StringVertex, StringEdge>>() {
         @Override
-        public boolean equivalenceCompare(StringVertex stringVertex, StringVertex e1, Graph<StringVertex, StringEdge> graph, Graph<StringVertex, StringEdge> c1) {
-            return stringVertex.getLabel().equals(e1.getLabel());
+        public boolean equivalenceCompare(StringVertex stringVertex, StringVertex v1, Graph<StringVertex, StringEdge> graph,
+                                          Graph<StringVertex, StringEdge> c1) {
+            return stringVertex.getLabel().equals(v1.getLabel());
         }
 
         @Override

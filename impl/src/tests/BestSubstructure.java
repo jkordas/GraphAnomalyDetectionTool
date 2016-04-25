@@ -1,5 +1,6 @@
 package tests;
 
+import algorithms.Utils;
 import graph.StringEdge;
 import graph.StringVertex;
 import graph.Visualisation;
@@ -12,7 +13,7 @@ import org.jgrapht.graph.SimpleDirectedGraph;
 public class BestSubstructure {
     public static void main(String[] args) {
         DirectedGraph<StringVertex, StringEdge> g =
-                new SimpleDirectedGraph<StringVertex, StringEdge>(StringEdge.class);
+                new SimpleDirectedGraph<>(StringEdge.class);
 
         StringVertex v1 = new StringVertex("A");
         StringVertex v2 = new StringVertex("B");
@@ -40,6 +41,9 @@ public class BestSubstructure {
         g.addEdge(v6, v1);
 
         System.out.println(g);
+
+        Utils.bestSubstructure(g);
+
         new Visualisation(g).showGraph();
     }
 }

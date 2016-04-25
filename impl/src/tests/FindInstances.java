@@ -1,10 +1,9 @@
 package tests;
 
-import algorithms.Utils;
+import algorithms.helper.InstanceFinder;
 import graph.StringEdge;
 import graph.StringVertex;
 import org.jgrapht.DirectedGraph;
-import org.jgrapht.Graph;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
 import java.util.List;
@@ -56,9 +55,9 @@ public class FindInstances {
         s.addEdge(vs1, vs2);
         s.addEdge(vs2, vs3);
 
-        List<Graph<StringVertex, StringEdge>> instances = Utils.findInstances(g, s);
+        List<DirectedGraph<StringVertex, StringEdge>> instances = InstanceFinder.findInstances(g, s);
         System.out.println(instances);
-        for (Graph<StringVertex, StringEdge> instance : instances) {
+        for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
 
         }
 

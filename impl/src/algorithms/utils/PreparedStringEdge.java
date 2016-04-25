@@ -28,4 +28,12 @@ public class PreparedStringEdge {
     public StringEdge getEdge() {
         return edge;
     }
+
+    public void setSource(StringVertex source) {
+        this.source = source;
+    }
+
+    public void setTarget(StringVertex target) {
+        this.target = target;
+    }
 }
