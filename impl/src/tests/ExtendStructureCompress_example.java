@@ -1,7 +1,7 @@
 package tests;
 
-import algorithms.Utils;
 import algorithms.helper.InstanceFinder;
+import algorithms.helper.StructureExtender;
 import graph.StringEdge;
 import graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -22,7 +22,8 @@ public class ExtendStructureCompress_example {
 
 
         List<DirectedGraph<StringVertex, StringEdge>> instances = InstanceFinder.findInstances(g, s);
-        List<DirectedGraph<StringVertex, StringEdge>> extendedStructures = Utils.extendStructure(g, instances.get(0));
+        List<DirectedGraph<StringVertex, StringEdge>> extendedStructures = StructureExtender.extendStructure(g,
+                instances.get(0));
 
         System.out.println(extendedStructures);
 
@@ -47,7 +48,7 @@ public class ExtendStructureCompress_example {
 
         DirectedSubgraph<StringVertex, StringEdge> sub = new DirectedSubgraph<>(g2,
                 new HashSet<>(Arrays.asList(v1, v2, v3)), new HashSet<>(Arrays.asList(e1, e2)));
-        List<DirectedGraph<StringVertex, StringEdge>> extendedStructures2 = Utils.extendStructure(g2, sub);
+        List<DirectedGraph<StringVertex, StringEdge>> extendedStructures2 = StructureExtender.extendStructure(g2, sub);
 
         System.out.println(extendedStructures2);
     }

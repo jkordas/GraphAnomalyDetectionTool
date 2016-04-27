@@ -1,6 +1,6 @@
 package tests;
 
-import algorithms.Utils;
+import algorithms.helper.Compressor;
 import graph.StringEdge;
 import graph.StringVertex;
 import graph.Visualisation;
@@ -15,7 +15,7 @@ public class CompressCompress_example {
         DirectedGraph<StringVertex, StringEdge> s = TestUtils.createCompressSubstructure1();
 
 
-        DirectedGraph<StringVertex, StringEdge> compressedGraph = Utils.compress(g, s);
+        DirectedGraph<StringVertex, StringEdge> compressedGraph = Compressor.compress(g, s);
         new Visualisation(compressedGraph).showGraph();
 
     }

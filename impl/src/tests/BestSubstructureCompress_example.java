@@ -1,6 +1,6 @@
 package tests;
 
-import algorithms.Utils;
+import algorithms.helper.BestSubstructureFinder;
 import graph.StringEdge;
 import graph.StringVertex;
 import graph.Visualisation;
@@ -15,7 +15,7 @@ public class BestSubstructureCompress_example {
         DirectedGraph<StringVertex, StringEdge> g = TestUtils.createCompressGraph();
 
 
-        Graph<StringVertex, StringEdge> bestSubstructure = Utils.bestSubstructure(g);
+        Graph<StringVertex, StringEdge> bestSubstructure = BestSubstructureFinder.bestSubstructure(g);
         new Visualisation(bestSubstructure).showGraph();
 
     }
