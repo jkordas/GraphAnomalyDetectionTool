@@ -5,6 +5,7 @@ import graph.StringEdge;
 import graph.StringVertex;
 import graph.Visualisation;
 import org.jgrapht.DirectedGraph;
+import org.jgrapht.Graph;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
 /**
@@ -42,8 +43,8 @@ public class BestSubstructure {
 
         System.out.println(g);
 
-        Utils.bestSubstructure(g);
+        Graph<StringVertex, StringEdge> bestSubstructure = Utils.bestSubstructure(g);
 
-        new Visualisation(g).showGraph();
+        new Visualisation(bestSubstructure).showGraph();
     }
 }

@@ -17,32 +17,62 @@ import java.util.*;
  */
 public class Utils {
     public static Graph<StringVertex, StringEdge> bestSubstructure(DirectedGraph<StringVertex, StringEdge> graph) {
-        Set<StringVertex> uniqueVertexSet = uniqueSetByVertexLabel(graph.vertexSet());
-        List<DirectedGraph<StringVertex, StringEdge>> bestSubstructures = new ArrayList<>();
+        List<DirectedGraph<StringVertex, StringEdge>> parentList = new LinkedList<>();
+        List<DirectedGraph<StringVertex, StringEdge>> childList = new LinkedList<>();
+        DirectedGraph<StringVertex, StringEdge> bestSubstructure = null;
+        int bestSubstructureDLValue = Integer.MAX_VALUE;
 
+        Set<StringVertex> uniqueVertexSet = uniqueSetByVertexLabel(graph.vertexSet());
         for (StringVertex vertex : uniqueVertexSet) {
             DirectedGraph<StringVertex, StringEdge> s = new SimpleDirectedGraph<>(StringEdge.class);
             s.addVertex(vertex);
+            parentList.add(s);
+        }
 
-            List<DirectedGraph<StringVertex, StringEdge>> instances = InstanceFinder.findInstances(graph, s);
-            for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
-                List<DirectedGraph<StringVertex, StringEdge>> extendedStructure = extendStructure(graph, instance);
-                bestSubstructures.addAll(extendedStructure);
+        while(!parentList.isEmpty()) {
+            System.out.println(parentList.size());
+            System.out.println(bestSubstructure);
+            DirectedGraph<StringVertex, StringEdge> bestChild = null;
+            int bestChildDLValue = Integer.MAX_VALUE;
+
+            while (!parentList.isEmpty()) {
+                DirectedGraph<StringVertex, StringEdge> s = parentList.remove(0);
+                System.out.println("vertex: " + s.vertexSet().size());
+                List<DirectedGraph<StringVertex, StringEdge>> instances = InstanceFinder.findInstances(graph, s);
+                for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
+                    List<DirectedGraph<StringVertex, StringEdge>> extendedStructure = extendStructure(graph, instance);
+                    childList.addAll(extendedStructure);
+                }
+
+                Set<DirectedGraph<StringVertex, StringEdge>> uniqueSet = uniqueSetByGraphIsomorphism(new HashSet<>(childList));
+                childList = new LinkedList<>(uniqueSet);
+
+                for (DirectedGraph<StringVertex, StringEdge> childInstance : childList) {
+                    int descriptionLength = calculateDescriptionLength(graph, childInstance);
+                    if (descriptionLength < bestSubstructureDLValue) {
+                        bestSubstructure = childInstance;
+                        bestSubstructureDLValue = descriptionLength;
+                    }
+                    if (descriptionLength < bestChildDLValue) {
+                        bestChild = childInstance;
+                        bestChildDLValue = descriptionLength;
+                    }
+                }
+            }
+
+            childList.clear();
+            parentList.clear();
+            if(bestChild != null) {
+                parentList.add(bestChild);
             }
         }
-        System.out.println(Arrays.toString(bestSubstructures.toArray()));
-        System.out.println(Arrays.toString(uniqueSetByGraphIsomorphism(new HashSet<>(bestSubstructures)).toArray()));
 
-
-        //TODO
-        return null;
+        return bestSubstructure;
     }
 
     private static Set<StringVertex> uniqueSetByVertexLabel(Set<StringVertex> vertexSet) {
-        Set<StringVertex> uniqueVertexSet = new TreeSet<>(new Comparator<StringVertex>() {
-            public int compare(StringVertex v1, StringVertex v2) {
-                return v1.getLabel().compareTo(v2.getLabel());
-            }
+        Set<StringVertex> uniqueVertexSet = new TreeSet<>((v1, v2) -> {
+            return v1.getLabel().compareTo(v2.getLabel());
         });
 
         uniqueVertexSet.addAll(vertexSet); // eliminate duplicates
@@ -52,27 +82,21 @@ public class Utils {
 
     private static Set<DirectedGraph<StringVertex, StringEdge>> uniqueSetByGraphIsomorphism(
             Set<DirectedGraph<StringVertex, StringEdge>> graphSet) {
-        Set<DirectedGraph<StringVertex, StringEdge>> uniqueGraphSet = new TreeSet<>((g1, g2) -> {
-            System.out.println("-------------");
-            System.out.println(g1);
-            System.out.println(g2);
-            if (IsomorphismDetector.isIsomorphic(g1, g2)) {
-                System.out.println("isomorphic");
-                return 0;
-            }
-
-            return g1.hashCode() - g2.hashCode();
-        });
+        Set<DirectedGraph<StringVertex, StringEdge>> uniqueGraphSet = new HashSet<>();
 
         for (DirectedGraph<StringVertex, StringEdge> graph : graphSet) {
             boolean shouldBeAdded = true;
-            //TODO
+            for (DirectedGraph<StringVertex, StringEdge> uniqueGraph : uniqueGraphSet) {
+                if(IsomorphismDetector.isIsomorphic(graph, uniqueGraph)) {
+                    shouldBeAdded = false;
+                    break;
+                }
+            }
 
-            uniqueGraphSet.add(graph);
-            System.out.println(Arrays.toString(uniqueGraphSet.toArray()));
-
+            if(shouldBeAdded) {
+                uniqueGraphSet.add(graph);
+            }
         }
-//        uniqueGraphSet.addAll(graphSet); // eliminate duplicates
 
         return uniqueGraphSet;
     }
