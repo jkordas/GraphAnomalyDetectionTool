@@ -1,10 +1,8 @@
 package algorithms.helper;
 
-import algorithms.Utils;
 import graph.StringEdge;
 import graph.StringVertex;
 import org.jgrapht.DirectedGraph;
-import org.jgrapht.Graph;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
 import java.util.*;
@@ -13,16 +11,23 @@ import java.util.*;
  * Created by jkordas on 2016-04-27.
  */
 public class BestSubstructureFinder {
-    public static Graph<StringVertex, StringEdge> bestSubstructure(DirectedGraph<StringVertex, StringEdge> graph) {
-        final int MAX_SUBSTRUCTURE_SIZE = 15;
-        return bestSubstructure(graph, MAX_SUBSTRUCTURE_SIZE);
+    public static DirectedGraph<StringVertex, StringEdge> bestSubstructure(DirectedGraph<StringVertex, StringEdge> graph) {
+        final int MAX_SUBSTRUCTURE_SIZE = 8;
+        final int SUBSTRUCTURES_LIMIT = 1;
+        return bestSubstructures(graph, MAX_SUBSTRUCTURE_SIZE, SUBSTRUCTURES_LIMIT).get(0);
     }
 
-    public static Graph<StringVertex, StringEdge> bestSubstructure(DirectedGraph<StringVertex, StringEdge> graph, int maxSubstructureSize) {
+    public static List<DirectedGraph<StringVertex, StringEdge>> bestSubstructures(DirectedGraph<StringVertex, StringEdge> graph,
+                                                                                  int substructuresLimit) {
+        final int MAX_SUBSTRUCTURE_SIZE = 8;
+        return bestSubstructures(graph, MAX_SUBSTRUCTURE_SIZE, substructuresLimit);
+    }
+
+    public static List<DirectedGraph<StringVertex, StringEdge>> bestSubstructures(DirectedGraph<StringVertex, StringEdge> graph,
+                                                                                  int maxSubstructureSize, int substructuresLimit) {
         List<DirectedGraph<StringVertex, StringEdge>> parentList = new LinkedList<>();
         List<DirectedGraph<StringVertex, StringEdge>> childList = new LinkedList<>();
-        DirectedGraph<StringVertex, StringEdge> bestSubstructure = null;
-        int bestSubstructureDLValue = Integer.MAX_VALUE;
+        SortedMap<Integer, DirectedGraph<StringVertex, StringEdge>> bestSubstructures = new TreeMap<>();
 
         Set<StringVertex> uniqueVertexSet = uniqueSetByVertexLabel(graph.vertexSet());
         for (StringVertex vertex : uniqueVertexSet) {
@@ -31,9 +36,8 @@ public class BestSubstructureFinder {
             parentList.add(s);
         }
 
-        while(!parentList.isEmpty()) {
-            System.out.println(parentList.size());
-            System.out.println(bestSubstructure);
+        while (!parentList.isEmpty()) {
+            System.out.println("Parent list size: " + parentList.size());
             DirectedGraph<StringVertex, StringEdge> bestChild = null;
             int bestChildDLValue = Integer.MAX_VALUE;
 
@@ -45,14 +49,16 @@ public class BestSubstructureFinder {
                     childList.addAll(extendedStructure);
                 }
 
-                Set<DirectedGraph<StringVertex, StringEdge>> uniqueSet = uniqueSetByGraphIsomorphism(new HashSet<>(childList));
+                Set<DirectedGraph<StringVertex, StringEdge>> uniqueSet = Utils.uniqueSetByGraphIsomorphism(new HashSet<>(childList));
                 childList = new LinkedList<>(uniqueSet);
 
                 for (DirectedGraph<StringVertex, StringEdge> childInstance : childList) {
                     int descriptionLength = Utils.calculateDescriptionLength(graph, childInstance);
-                    if (descriptionLength < bestSubstructureDLValue) {
-                        bestSubstructure = childInstance;
-                        bestSubstructureDLValue = descriptionLength;
+                    if (bestSubstructures.isEmpty() || descriptionLength < bestSubstructures.lastKey()) {
+                        bestSubstructures.put(descriptionLength, childInstance);
+                        if (bestSubstructures.size() > substructuresLimit) {
+                            bestSubstructures.remove(bestSubstructures.lastKey());
+                        }
                     }
                     if (descriptionLength < bestChildDLValue) {
                         bestChild = childInstance;
@@ -63,12 +69,13 @@ public class BestSubstructureFinder {
 
             childList.clear();
             parentList.clear();
-            if(bestChild != null && Utils.calculateDescriptionLength(bestChild) <= maxSubstructureSize) {
+            System.out.println(Utils.calculateDescriptionLength(bestChild));
+            if (bestChild != null && Utils.calculateDescriptionLength(bestChild) <= maxSubstructureSize) {
                 parentList.add(bestChild);
             }
         }
 
-        return bestSubstructure;
+        return new ArrayList<>(bestSubstructures.values());
     }
 
     private static Set<StringVertex> uniqueSetByVertexLabel(Set<StringVertex> vertexSet) {
@@ -81,24 +88,4 @@ public class BestSubstructureFinder {
         return uniqueVertexSet;
     }
 
-    private static Set<DirectedGraph<StringVertex, StringEdge>> uniqueSetByGraphIsomorphism(
-            Set<DirectedGraph<StringVertex, StringEdge>> graphSet) {
-        Set<DirectedGraph<StringVertex, StringEdge>> uniqueGraphSet = new HashSet<>();
-
-        for (DirectedGraph<StringVertex, StringEdge> graph : graphSet) {
-            boolean shouldBeAdded = true;
-            for (DirectedGraph<StringVertex, StringEdge> uniqueGraph : uniqueGraphSet) {
-                if(IsomorphismDetector.isIsomorphic(graph, uniqueGraph)) {
-                    shouldBeAdded = false;
-                    break;
-                }
-            }
-
-            if(shouldBeAdded) {
-                uniqueGraphSet.add(graph);
-            }
-        }
-
-        return uniqueGraphSet;
-    }
 }

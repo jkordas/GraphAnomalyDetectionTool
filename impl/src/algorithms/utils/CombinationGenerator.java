@@ -5,13 +5,13 @@ import java.util.Arrays;
 /**
  * Created by jkordas on 08/04/16.
  */
-public class Generator {
+public class CombinationGenerator {
     private int [] arr;
     private int n; // array length
     private int k; // number of ones
     private boolean first = true;
 
-    public Generator(int n, int k) {
+    public CombinationGenerator(int n, int k) {
         this.n = n;
         this.k = k;
 
@@ -89,8 +89,9 @@ public class Generator {
         return lastIndex >= k;
     }
 
+    //TODO: change to unit test
     public static void main(String[] args) {
-        Generator g = new Generator(7, 4);
+        CombinationGenerator g = new CombinationGenerator(7, 4);
 
         while (g.hasNext()){
             System.out.println(Arrays.toString(g.next()));

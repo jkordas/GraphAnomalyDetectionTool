@@ -1,0 +1,8 @@
+1. Przerobic wszystkie testy na unit testy
+2. Dodac interface dla IsomorphismDetectora i wykorzystac go w fukncji findInstance
+3. Dodac interfejsy do wszystkich klas z pakietu helper
+
+//liczba wierzcholkow
+ID ETYKIETA
+//liczba krawedzi
+ZRODLO.ID CEL.ID ETYKIETA

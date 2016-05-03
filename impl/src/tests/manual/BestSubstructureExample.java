@@ -1,21 +1,18 @@
-package tests;
+package tests.manual;
 
 import algorithms.helper.BestSubstructureFinder;
 import graph.StringEdge;
 import graph.StringVertex;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.SimpleDirectedGraph;
-import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Created by jkordas on 12/03/16.
  */
-public class BestSubstructure {
-
-    @Test
-    public void simpleTest() {
+public class BestSubstructureExample {
+    public static void main(String[] args) {
         DirectedGraph<StringVertex, StringEdge> g =
                 new SimpleDirectedGraph<>(StringEdge.class);
 
@@ -46,9 +43,10 @@ public class BestSubstructure {
 
         System.out.println(g);
 
-        DirectedGraph<StringVertex, StringEdge> substructure = BestSubstructureFinder.bestSubstructure(g);
+        List<DirectedGraph<StringVertex, StringEdge>> substructures = BestSubstructureFinder.bestSubstructures(g, 3);
 
-        assertEquals(3, substructure.vertexSet().size());
-        assertEquals(2, substructure.edgeSet().size());
+        for (DirectedGraph<StringVertex, StringEdge> substructure : substructures) {
+            System.out.println(substructure);
+        }
     }
 }

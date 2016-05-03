@@ -1,11 +1,13 @@
 package algorithms.helper;
 
+import algorithms.utils.PreparedStringEdge;
 import algorithms.utils.deepCopy.DeepCopy;
 import graph.StringEdge;
 import graph.StringVertex;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.Graph;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -36,7 +38,12 @@ public class StructureExtender {
             if (s.containsVertex(source) && !s.containsVertex(target)) {
                 s.addVertex(target);
                 s.addEdge(source, target, edge);
+                Set<PreparedStringEdge> absentEdges = getAbsentEdges(g, s);
+                addAbsentEdges(s, absentEdges);
+
                 DirectedGraph<StringVertex, StringEdge> extendedStructure = (DirectedGraph<StringVertex, StringEdge>) DeepCopy.copy(s);
+
+                removeAbsentEdges(s, absentEdges);
                 s.removeEdge(source, target);
                 s.removeVertex(target);
 
@@ -45,7 +52,12 @@ public class StructureExtender {
             if (!s.containsVertex(source) && s.containsVertex(target)) {
                 s.addVertex(source);
                 s.addEdge(source, target, edge);
+                Set<PreparedStringEdge> absentEdges = getAbsentEdges(g, s);
+                addAbsentEdges(s, absentEdges);
+
                 DirectedGraph<StringVertex, StringEdge> extendedStructure = (DirectedGraph<StringVertex, StringEdge>) DeepCopy.copy(s);
+
+                removeAbsentEdges(s, absentEdges);
                 s.removeEdge(source, target);
                 s.removeVertex(source);
 
@@ -54,5 +66,37 @@ public class StructureExtender {
         }
 
         return extendedStructures;
+    }
+
+    private static void removeAbsentEdges(Graph<StringVertex, StringEdge> s, Set<PreparedStringEdge> absentEdges) {
+        for (PreparedStringEdge absentEdge : absentEdges) {
+            s.removeEdge(absentEdge.getSource(), absentEdge.getTarget());
+        }
+    }
+
+    private static void addAbsentEdges(Graph<StringVertex, StringEdge> s, Set<PreparedStringEdge> absentEdges) {
+        for (PreparedStringEdge absentEdge : absentEdges) {
+            s.addEdge(absentEdge.getSource(), absentEdge.getTarget(), absentEdge.getEdge());
+        }
+    }
+
+    private static Set<PreparedStringEdge> getAbsentEdges(Graph<StringVertex, StringEdge> g, Graph<StringVertex, StringEdge> s) {
+        Set<PreparedStringEdge> absentEdges = new HashSet<>();
+        Set<StringVertex> sVertexSet = s.vertexSet();
+
+        for (StringVertex vertex : sVertexSet) {
+            Set<StringEdge> vertexEdges = g.edgesOf(vertex);
+            for (StringEdge edge : vertexEdges) {
+                StringVertex source = g.getEdgeSource(edge);
+                StringVertex target = g.getEdgeTarget(edge);
+
+                if(s.containsVertex(source) && s.containsVertex(target) && !s.containsEdge(source, target)){
+                    absentEdges.add(new PreparedStringEdge(source, target, edge));
+                }
+            }
+        }
+        //TODO absentEdges may contain duplicates, but it shouldnt break anything
+
+        return absentEdges;
     }
 }

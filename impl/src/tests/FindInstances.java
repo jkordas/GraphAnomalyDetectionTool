@@ -5,16 +5,35 @@ import graph.StringEdge;
 import graph.StringVertex;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.SimpleDirectedGraph;
+import org.junit.Test;
 
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by jkordas on 12/03/16.
  */
 public class FindInstances {
-    public static void main(String[] args) {
-        DirectedGraph<StringVertex, StringEdge> g =
-                new SimpleDirectedGraph<StringVertex, StringEdge>(StringEdge.class);
+
+    @Test
+    public void simpleTestCompressExample() {
+        DirectedGraph<StringVertex, StringEdge> g = TestUtils.createCompressGraph();
+        DirectedGraph<StringVertex, StringEdge> s1 = TestUtils.createCompressSubstructure1();
+        DirectedGraph<StringVertex, StringEdge> s2 = TestUtils.createCompressSubstructure2();
+
+
+        List<DirectedGraph<StringVertex, StringEdge>> instances1 = InstanceFinder.findInstances(g, s1);
+        List<DirectedGraph<StringVertex, StringEdge>> instances2 = InstanceFinder.findInstances(g, s2);
+
+
+        assertEquals(4, instances1.size());
+        assertEquals(3, instances2.size());
+    }
+
+    @Test
+    public void topologyInstanceMatch() {
+        DirectedGraph<StringVertex, StringEdge> g = new SimpleDirectedGraph<>(StringEdge.class);
 
         StringVertex v1 = new StringVertex("A");
         StringVertex v2 = new StringVertex("B");
@@ -39,8 +58,7 @@ public class FindInstances {
         g.addEdge(v4, v5);
         g.addEdge(v4, v1);
 
-    DirectedGraph<StringVertex, StringEdge> s =
-                new SimpleDirectedGraph<StringVertex, StringEdge>(StringEdge.class);
+        DirectedGraph<StringVertex, StringEdge> s = new SimpleDirectedGraph<>(StringEdge.class);
 
         StringVertex vs1 = new StringVertex("A");
         StringVertex vs2 = new StringVertex("B");
@@ -55,11 +73,17 @@ public class FindInstances {
         s.addEdge(vs1, vs2);
         s.addEdge(vs2, vs3);
 
-        List<DirectedGraph<StringVertex, StringEdge>> instances = InstanceFinder.findInstances(g, s);
-        System.out.println(instances);
-        for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
+        List<DirectedGraph<StringVertex, StringEdge>> instances1 = InstanceFinder.findInstances(g, s);
+        assertEquals(2, instances1.size());
 
-        }
+        vs1.setLabel("F");
+        vs2.setLabel("G");
+        vs3.setLabel("H");
+        List<DirectedGraph<StringVertex, StringEdge>> instances2 = InstanceFinder.findInstances(g, s);
+        List<DirectedGraph<StringVertex, StringEdge>> instancesInexact = InstanceFinder.findInstances(g, s, false);
+
+        assertEquals(0, instances2.size());
+        assertEquals(4, instancesInexact.size());
 
     }
 }

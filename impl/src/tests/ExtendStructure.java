@@ -7,29 +7,39 @@ import graph.StringVertex;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DirectedSubgraph;
 import org.jgrapht.graph.SimpleDirectedGraph;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Created by jkordas on 12/03/16.
  */
-public class ExtendStructureCompress_example {
-    public static void main(String[] args) {
+public class ExtendStructure {
+
+    @Test
+    public void simpleTestCompressExample() {
         DirectedGraph<StringVertex, StringEdge> g = TestUtils.createCompressGraph();
         DirectedGraph<StringVertex, StringEdge> s = TestUtils.createCompressSubstructure1();
 
-
+        int extendedSubstructuresNumber = 0;
         List<DirectedGraph<StringVertex, StringEdge>> instances = InstanceFinder.findInstances(g, s);
-        List<DirectedGraph<StringVertex, StringEdge>> extendedStructures = StructureExtender.extendStructure(g,
-                instances.get(0));
+        for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
 
-        System.out.println(extendedStructures);
+            List<DirectedGraph<StringVertex, StringEdge>> extendedStructures = StructureExtender.extendStructure(g, instance);
+            extendedSubstructuresNumber += extendedStructures.size();
+        }
 
-        //---------------------
-        DirectedGraph<StringVertex, StringEdge> g2 =
-                new SimpleDirectedGraph<StringVertex, StringEdge>(StringEdge.class);
+
+        assertEquals(13, extendedSubstructuresNumber);
+    }
+
+    @Test
+    public void edgeTest() {
+        DirectedGraph<StringVertex, StringEdge> g2 = new SimpleDirectedGraph<>(StringEdge.class);
 
         StringVertex v1 = new StringVertex("1");
         StringVertex v2 = new StringVertex("2");
@@ -46,10 +56,10 @@ public class ExtendStructureCompress_example {
         g2.addEdge(v2, v3, e2);
         g2.addEdge(v3, v1, e3);
 
-        DirectedSubgraph<StringVertex, StringEdge> sub = new DirectedSubgraph<>(g2,
-                new HashSet<>(Arrays.asList(v1, v2, v3)), new HashSet<>(Arrays.asList(e1, e2)));
+        DirectedSubgraph<StringVertex, StringEdge> sub = new DirectedSubgraph<>(g2, new HashSet<>(Arrays.asList(v1, v2, v3)),
+                new HashSet<>(Arrays.asList(e1, e2)));
         List<DirectedGraph<StringVertex, StringEdge>> extendedStructures2 = StructureExtender.extendStructure(g2, sub);
 
-        System.out.println(extendedStructures2);
+        assertEquals(3, extendedStructures2.get(0).edgeSet().size());
     }
 }
