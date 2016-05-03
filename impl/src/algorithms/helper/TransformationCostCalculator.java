@@ -55,7 +55,15 @@ public class TransformationCostCalculator {
         return minCost;
     }
 
-    private static int getEdgesCost(Set<StringEdge> edgeSet, DefaultGraphMapping<StringVertex, StringEdge> mapping, boolean forward) {
+    public static int subgraphTransformationCost(DirectedGraph<StringVertex, StringEdge> s, DirectedGraph<StringVertex, StringEdge> g) {
+        //assume s is subgraph of g
+
+        //missing edge/vertex +1
+        //missing edge/vertex label +1
+        return 2 * (g.vertexSet().size() - s.vertexSet().size() + g.edgeSet().size() - s.edgeSet().size());
+    }
+
+        private static int getEdgesCost(Set<StringEdge> edgeSet, DefaultGraphMapping<StringVertex, StringEdge> mapping, boolean forward) {
         int cost = 0;
         for (StringEdge edge : edgeSet) {
             StringEdge edgeCorrespondence = mapping.getEdgeCorrespondence(edge, forward);

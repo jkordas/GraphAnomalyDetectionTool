@@ -1,12 +1,11 @@
 package algorithms.helper;
 
-import algorithms.utils.CombinationGenerator;
 import graph.StringEdge;
 import graph.StringVertex;
 import org.jgrapht.DirectedGraph;
+import org.jgrapht.alg.ConnectivityInspector;
 
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -25,21 +24,12 @@ public class Utils {
         return calculateDescriptionLength(s) + calculateDescriptionLength(compressedGraph);
     }
 
-    static List<DirectedGraph<StringVertex, StringEdge>> includedSubstructures(DirectedGraph<StringVertex, StringEdge> s){
-        List<DirectedGraph<StringVertex, StringEdge>> includedSubstructures = new LinkedList<>();
-        int n = s.vertexSet().size();
-
-        for(int k = n - 1; k > 0; --k) {
-            CombinationGenerator generator = new CombinationGenerator(n, k);
-            while (generator.hasNext()){
-                //TODO
-            }
-        }
-
-        return includedSubstructures;
+    public static boolean isGraphConnected(DirectedGraph<StringVertex, StringEdge> g) {
+        ConnectivityInspector<StringVertex, StringEdge> inspector = new ConnectivityInspector<>(g);
+        return inspector.isGraphConnected();
     }
 
-    static Set<DirectedGraph<StringVertex, StringEdge>> uniqueSetByGraphIsomorphism(
+    public static Set<DirectedGraph<StringVertex, StringEdge>> uniqueSetByGraphIsomorphism(
             Set<DirectedGraph<StringVertex, StringEdge>> graphSet) {
         Set<DirectedGraph<StringVertex, StringEdge>> uniqueGraphSet = new HashSet<>();
 
@@ -58,6 +48,14 @@ public class Utils {
         }
 
         return uniqueGraphSet;
+    }
+
+    public static Set<DirectedGraph<StringVertex, StringEdge>> uniqueSetByGraphIsomorphism(
+            List<DirectedGraph<StringVertex, StringEdge>> graph) {
+        Set<DirectedGraph<StringVertex, StringEdge>> graphSet = new HashSet<>(graph);
+
+
+        return uniqueSetByGraphIsomorphism(graphSet);
     }
 
     static Set<StringEdge> loadEdges(DirectedGraph<StringVertex, StringEdge> g, Set<StringVertex> loadedVertices) {
@@ -84,5 +82,17 @@ public class Utils {
         }
 
         return properVertices;
+    }
+
+    public static boolean containsSubstructure(List<DirectedGraph<StringVertex, StringEdge>> substructureInstances,
+                                               DirectedGraph<StringVertex, StringEdge> instance) {
+        for (DirectedGraph<StringVertex, StringEdge> substructureInstance : substructureInstances) {
+            Set<StringVertex> intersection = new HashSet<>(substructureInstance.vertexSet()); // use the copy constructor
+            intersection.retainAll(instance.vertexSet());
+            if (intersection.size() > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }

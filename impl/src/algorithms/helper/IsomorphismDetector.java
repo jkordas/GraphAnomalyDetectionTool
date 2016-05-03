@@ -5,6 +5,7 @@ import graph.StringVertex;
 import org.jgrapht.Graph;
 import org.jgrapht.alg.isomorphism.IsomorphismInspector;
 import org.jgrapht.alg.isomorphism.VF2GraphIsomorphismInspector;
+import org.jgrapht.alg.isomorphism.VF2SubgraphIsomorphismInspector;
 
 import java.util.Comparator;
 
@@ -41,5 +42,11 @@ public class IsomorphismDetector {
         return inspector.isomorphismExists();
     }
 
+
+    public static boolean isSubgraphIsomorphic(Graph<StringVertex, StringEdge> g, Graph<StringVertex, StringEdge> s) {
+        IsomorphismInspector<StringVertex, StringEdge> inspector = new VF2SubgraphIsomorphismInspector<>(g, s, vertexComparator,
+                edgeComparator, false);
+        return inspector.isomorphismExists();
+    }
 
 }

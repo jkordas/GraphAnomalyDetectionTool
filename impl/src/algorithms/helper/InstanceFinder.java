@@ -35,6 +35,7 @@ public class InstanceFinder {
             Set<StringEdge> loadedEdges = Utils.loadEdges(g, loadedVertices);
             DirectedSubgraph<StringVertex, StringEdge> loadedGraph = new DirectedSubgraph<>(g, loadedVertices, loadedEdges);
 
+            //TODO: interface
             if (exactMatch) {
                 if (IsomorphismDetector.isIsomorphic(loadedGraph, substructure)) {
                     instanceList.add(loadedGraph);

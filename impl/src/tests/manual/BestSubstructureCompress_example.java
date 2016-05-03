@@ -17,7 +17,6 @@ public class BestSubstructureCompress_example {
 //        DirectedGraph<StringVertex, StringEdge> g = TestUtils.createCompressGraph();
         DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("impl/graphModels/MDLGraph.csv");
 
-
         List<DirectedGraph<StringVertex, StringEdge>> substructures = BestSubstructureFinder.bestSubstructures(g, 3);
 
         for (DirectedGraph<StringVertex, StringEdge> substructure : substructures) {

@@ -13,8 +13,7 @@ import java.util.List;
  */
 public class BestSubstructureExample {
     public static void main(String[] args) {
-        DirectedGraph<StringVertex, StringEdge> g =
-                new SimpleDirectedGraph<>(StringEdge.class);
+        DirectedGraph<StringVertex, StringEdge> g = new SimpleDirectedGraph<>(StringEdge.class);
 
         StringVertex v1 = new StringVertex("A");
         StringVertex v2 = new StringVertex("B");
