@@ -1,5 +1,3 @@
-package tests;
-
 import algorithms.helper.BestSubstructureFinder;
 import graph.StringEdge;
 import graph.StringVertex;

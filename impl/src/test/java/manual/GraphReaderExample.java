@@ -1,4 +1,4 @@
-package tests.manual;
+package manual;
 
 import graph.StringEdge;
 import graph.StringVertex;

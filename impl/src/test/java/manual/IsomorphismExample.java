@@ -1,4 +1,4 @@
-package tests.manual;
+package manual;
 
 import algorithms.helper.IsomorphismDetector;
 import graph.StringEdge;

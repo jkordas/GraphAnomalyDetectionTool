@@ -1,6 +1,6 @@
-package tests.manual;
+package manual;
 
-import algorithms.GBAD_P;
+import algorithms.GBAD_MPS;
 import algorithms.utils.MapUtil;
 import graph.StringEdge;
 import graph.StringVertex;
@@ -13,12 +13,12 @@ import java.util.Map;
 /**
  * Created by jkordas on 12/03/16.
  */
-public class GBAD_P_Example {
+public class GBAD_MPS_Example {
     public static void main(String[] args) {
-//        DirectedGraph<StringVertex, StringEdge> g = TestUtils.createCompressGraph();
-        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("impl/graphModels/PGraph.csv");
+//        DirectedGraph<StringVertex, StringEdge> g = manual.TestUtils.createCompressGraph();
+        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("impl/graphModels/MPSGraph.csv");
 
-        Map<DirectedGraph<StringVertex, StringEdge>, Integer> anomalies = GBAD_P.findAnomalies(g);
+        Map<DirectedGraph<StringVertex, StringEdge>, Integer> anomalies = GBAD_MPS.findAnomalies(g);
 
         List<Map.Entry<DirectedGraph<StringVertex, StringEdge>, Integer>> entries = MapUtil.sortByValue(anomalies);
         for (Map.Entry<DirectedGraph<StringVertex, StringEdge>, Integer> entry : entries) {

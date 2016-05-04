@@ -1,5 +1,3 @@
-package tests;
-
 import algorithms.helper.IsomorphismDetector;
 import graph.StringEdge;
 import graph.StringVertex;

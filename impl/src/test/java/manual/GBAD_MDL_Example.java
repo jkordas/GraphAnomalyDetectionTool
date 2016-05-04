@@ -1,4 +1,4 @@
-package tests.manual;
+package manual;
 
 import algorithms.GBAD_MDL;
 import algorithms.utils.MapUtil;
@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class GBAD_MDL_Example {
     public static void main(String[] args) {
-//        DirectedGraph<StringVertex, StringEdge> g = TestUtils.createCompressGraph();
+//        DirectedGraph<StringVertex, StringEdge> g = manual.TestUtils.createCompressGraph();
         DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("impl/graphModels/MDLGraph.csv");
 
         Map<DirectedGraph<StringVertex, StringEdge>, Integer> anomalies = GBAD_MDL.findAnomalies(g);

@@ -1,11 +1,10 @@
-package tests.manual;
+package manual;
 
 import algorithms.helper.IncludedSubstructuresFinder;
 import graph.StringEdge;
 import graph.StringVertex;
 import graph.Visualisation;
 import org.jgrapht.DirectedGraph;
-import tests.TestUtils;
 
 import java.util.List;
 

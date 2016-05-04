@@ -1,4 +1,4 @@
-package tests.manual;
+package manual;
 
 import algorithms.helper.Compressor;
 import graph.StringEdge;
@@ -6,7 +6,6 @@ import graph.StringVertex;
 import graph.Visualisation;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.SimpleDirectedGraph;
-import tests.TestUtils;
 
 /**
  * Created by jkordas on 12/03/16.

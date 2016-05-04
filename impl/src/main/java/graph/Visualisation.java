@@ -9,7 +9,6 @@ import org.jgrapht.ext.JGraphXAdapter;
 import javax.swing.*;
 import java.awt.*;
 
-
 public class Visualisation
         extends JApplet {
 

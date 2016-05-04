@@ -1,4 +1,4 @@
-package tests.manual;
+package manual;
 
 import algorithms.helper.Utils;
 import algorithms.helper.BestSubstructureFinder;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class BestSubstructureCompress_example {
     public static void main(String[] args) {
-//        DirectedGraph<StringVertex, StringEdge> g = TestUtils.createCompressGraph();
+//        DirectedGraph<StringVertex, StringEdge> g = manual.TestUtils.createCompressGraph();
         DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("impl/graphModels/MDLGraph.csv");
 
         List<DirectedGraph<StringVertex, StringEdge>> substructures = BestSubstructureFinder.bestSubstructures(g, 3);

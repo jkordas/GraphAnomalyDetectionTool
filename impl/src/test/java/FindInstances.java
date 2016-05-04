@@ -1,8 +1,7 @@
-package tests;
-
 import algorithms.helper.InstanceFinder;
 import graph.StringEdge;
 import graph.StringVertex;
+import manual.TestUtils;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.SimpleDirectedGraph;
 import org.junit.Test;

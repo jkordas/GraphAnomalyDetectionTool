@@ -1,9 +1,8 @@
-package tests;
-
 import algorithms.helper.Utils;
 import algorithms.helper.Compressor;
 import graph.StringEdge;
 import graph.StringVertex;
+import manual.TestUtils;
 import org.jgrapht.DirectedGraph;
 import org.junit.Test;
 
