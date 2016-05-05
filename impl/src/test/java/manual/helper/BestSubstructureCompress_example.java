@@ -1,6 +1,6 @@
-package manual;
+package manual.helper;
 
-import GAD.algorithms.helper.BestSubstructureFinder;
+import GAD.algorithms.Algorithms;
 import GAD.algorithms.helper.Utils;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
@@ -17,7 +17,7 @@ public class BestSubstructureCompress_example {
 //        DirectedGraph<StringVertex, StringEdge> g = manual.TestUtils.createCompressGraph();
         DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("impl/graphModels/MDLGraph.csv");
 
-        List<DirectedGraph<StringVertex, StringEdge>> substructures = BestSubstructureFinder.bestSubstructures(g, 3);
+        List<DirectedGraph<StringVertex, StringEdge>> substructures = Algorithms.getInstance().bestSubstructures(g, 3);
 
         for (DirectedGraph<StringVertex, StringEdge> substructure : substructures) {
             System.out.println(substructure);

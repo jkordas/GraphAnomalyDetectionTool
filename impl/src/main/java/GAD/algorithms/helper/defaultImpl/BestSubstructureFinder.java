@@ -1,5 +1,10 @@
-package GAD.algorithms.helper;
+package GAD.algorithms.helper.defaultImpl;
 
+import GAD.Config;
+import GAD.algorithms.helper.IBestSubstructureFinder;
+import GAD.algorithms.helper.InstanceFinder;
+import GAD.algorithms.helper.StructureExtender;
+import GAD.algorithms.helper.Utils;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -10,21 +15,9 @@ import java.util.*;
 /**
  * Created by jkordas on 2016-04-27.
  */
-public class BestSubstructureFinder {
-    public static DirectedGraph<StringVertex, StringEdge> bestSubstructure(DirectedGraph<StringVertex, StringEdge> graph) {
-        final int MAX_SUBSTRUCTURE_SIZE = 8;
-        final int SUBSTRUCTURES_LIMIT = 1;
-        return bestSubstructures(graph, MAX_SUBSTRUCTURE_SIZE, SUBSTRUCTURES_LIMIT).get(0);
-    }
-
-    public static List<DirectedGraph<StringVertex, StringEdge>> bestSubstructures(DirectedGraph<StringVertex, StringEdge> graph,
-                                                                                  int substructuresLimit) {
-        final int MAX_SUBSTRUCTURE_SIZE = 8;
-        return bestSubstructures(graph, MAX_SUBSTRUCTURE_SIZE, substructuresLimit);
-    }
-
-    public static List<DirectedGraph<StringVertex, StringEdge>> bestSubstructures(DirectedGraph<StringVertex, StringEdge> graph,
-                                                                                  int maxSubstructureSize, int substructuresLimit) {
+public class BestSubstructureFinder implements IBestSubstructureFinder {
+    public List<DirectedGraph<StringVertex, StringEdge>> bestSubstructures(DirectedGraph<StringVertex, StringEdge> graph, int limit) {
+        int maxSubstructureSize = Config.getInstance().MAX_SUBSTRUCTURE_SIZE;
         List<DirectedGraph<StringVertex, StringEdge>> parentList = new LinkedList<>();
         List<DirectedGraph<StringVertex, StringEdge>> childList = new LinkedList<>();
         SortedMap<Integer, DirectedGraph<StringVertex, StringEdge>> bestSubstructures = new TreeMap<>();
@@ -56,7 +49,7 @@ public class BestSubstructureFinder {
                     int descriptionLength = Utils.calculateDescriptionLength(graph, childInstance);
                     if (bestSubstructures.isEmpty() || descriptionLength < bestSubstructures.lastKey()) {
                         bestSubstructures.put(descriptionLength, childInstance);
-                        if (bestSubstructures.size() > substructuresLimit) {
+                        if (bestSubstructures.size() > limit) {
                             bestSubstructures.remove(bestSubstructures.lastKey());
                         }
                     }

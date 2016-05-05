@@ -1,4 +1,4 @@
-package manual;
+package manual.helper;
 
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;

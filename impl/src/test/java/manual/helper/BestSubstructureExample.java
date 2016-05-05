@@ -1,6 +1,6 @@
-package manual;
+package manual.helper;
 
-import GAD.algorithms.helper.BestSubstructureFinder;
+import GAD.algorithms.Algorithms;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -42,7 +42,7 @@ public class BestSubstructureExample {
 
         System.out.println(g);
 
-        List<DirectedGraph<StringVertex, StringEdge>> substructures = BestSubstructureFinder.bestSubstructures(g, 3);
+        List<DirectedGraph<StringVertex, StringEdge>> substructures = Algorithms.getInstance().bestSubstructures(g, 3);
 
         for (DirectedGraph<StringVertex, StringEdge> substructure : substructures) {
             System.out.println(substructure);

@@ -1,9 +1,10 @@
-package manual;
+package manual.helper;
 
-import GAD.algorithms.helper.Compressor;
+import GAD.algorithms.Algorithms;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import GAD.graph.Visualisation;
+import manual.TestUtils;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
@@ -36,7 +37,7 @@ public class CompressCompress_example {
         s2.addEdge(vs2, vs3);
         s2.addEdge(vs3, vs4);
 
-        DirectedGraph<StringVertex, StringEdge> compressedGraph2 = Compressor.compress(g, s2);
+        DirectedGraph<StringVertex, StringEdge> compressedGraph2 = Algorithms.getInstance().compress(g, s2);
 
 
         new Visualisation(compressedGraph2).showGraph();

@@ -1,5 +1,7 @@
-package GAD.algorithms.helper;
+package GAD.algorithms.helper.defaultImpl;
 
+import GAD.algorithms.helper.ICompressor;
+import GAD.algorithms.helper.InstanceFinder;
 import GAD.algorithms.utils.PreparedStringEdge;
 import GAD.algorithms.utils.deepCopy.DeepCopy;
 import GAD.graph.StringEdge;
@@ -14,8 +16,8 @@ import java.util.Set;
 /**
  * Created by jkordas on 2016-04-27.
  */
-public class Compressor {
-    public static DirectedGraph<StringVertex, StringEdge> compress(DirectedGraph<StringVertex, StringEdge> g,
+public class Compressor implements ICompressor {
+    public DirectedGraph<StringVertex, StringEdge> compress(DirectedGraph<StringVertex, StringEdge> g,
                                                                    DirectedGraph<StringVertex, StringEdge> substructure) {
         DirectedGraph<StringVertex, StringEdge> compressedGraph = (DirectedGraph<StringVertex, StringEdge>) DeepCopy.copy(g);
         List<DirectedGraph<StringVertex, StringEdge>> instances = InstanceFinder.findInstances(compressedGraph, substructure);

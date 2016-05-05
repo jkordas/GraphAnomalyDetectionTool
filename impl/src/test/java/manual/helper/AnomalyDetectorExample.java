@@ -1,4 +1,4 @@
-package manual;
+package manual.helper;
 
 import GAD.AnomalyDetector;
 import GAD.algorithms.Anomaly;

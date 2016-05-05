@@ -1,9 +1,10 @@
-package manual;
+package manual.helper;
 
 import GAD.algorithms.helper.IncludedSubstructuresFinder;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import GAD.graph.Visualisation;
+import manual.TestUtils;
 import org.jgrapht.DirectedGraph;
 
 import java.util.List;

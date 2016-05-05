@@ -1,4 +1,4 @@
-import GAD.algorithms.helper.BestSubstructureFinder;
+import GAD.algorithms.Algorithms;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -44,7 +44,7 @@ public class BestSubstructure {
 
         System.out.println(g);
 
-        DirectedGraph<StringVertex, StringEdge> substructure = BestSubstructureFinder.bestSubstructure(g);
+        DirectedGraph<StringVertex, StringEdge> substructure = Algorithms.getInstance().bestSubstructure(g);
 
         assertEquals(3, substructure.vertexSet().size());
         assertEquals(2, substructure.edgeSet().size());

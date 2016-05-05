@@ -1,4 +1,4 @@
-import GAD.algorithms.helper.Compressor;
+import GAD.algorithms.Algorithms;
 import GAD.algorithms.helper.Utils;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
@@ -18,8 +18,8 @@ public class Compress {
         DirectedGraph<StringVertex, StringEdge> s1 = TestUtils.createCompressSubstructure1();
         DirectedGraph<StringVertex, StringEdge> s2 = TestUtils.createCompressSubstructure2();
 
-        DirectedGraph<StringVertex, StringEdge> compressedGraph1 = Compressor.compress(g, s1);
-        DirectedGraph<StringVertex, StringEdge> compressedGraph2 = Compressor.compress(g, s2);
+        DirectedGraph<StringVertex, StringEdge> compressedGraph1 = Algorithms.getInstance().compress(g, s1);
+        DirectedGraph<StringVertex, StringEdge> compressedGraph2 = Algorithms.getInstance().compress(g, s2);
 
         assertEquals(24, Utils.calculateDescriptionLength(compressedGraph1));//12+12
         assertEquals(17, Utils.calculateDescriptionLength(compressedGraph2));//8 + 9

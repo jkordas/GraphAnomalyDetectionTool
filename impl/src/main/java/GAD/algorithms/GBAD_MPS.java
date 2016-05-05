@@ -1,6 +1,9 @@
 package GAD.algorithms;
 
-import GAD.algorithms.helper.*;
+import GAD.algorithms.helper.IncludedSubstructuresFinder;
+import GAD.algorithms.helper.InstanceFinder;
+import GAD.algorithms.helper.TransformationCostCalculator;
+import GAD.algorithms.helper.Utils;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -18,7 +21,7 @@ public class GBAD_MPS {
 
     public static List<Anomaly> findAnomalies(DirectedGraph<StringVertex, StringEdge> g) {
         List<Anomaly> anomalies = new LinkedList<>();
-        List<DirectedGraph<StringVertex, StringEdge>> bestSubstructures = BestSubstructureFinder.bestSubstructures(g,
+        List<DirectedGraph<StringVertex, StringEdge>> bestSubstructures = Algorithms.getInstance().bestSubstructures(g,
                 BEST_SUBSTRUCTURES_LIMIT);
 
         for (DirectedGraph<StringVertex, StringEdge> bestSubstructure : bestSubstructures) {

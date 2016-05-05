@@ -1,4 +1,4 @@
-package manual;
+package manual.helper;
 
 import GAD.algorithms.helper.IsomorphismDetector;
 import GAD.graph.StringEdge;

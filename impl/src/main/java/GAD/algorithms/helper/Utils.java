@@ -1,5 +1,6 @@
 package GAD.algorithms.helper;
 
+import GAD.algorithms.Algorithms;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -19,7 +20,7 @@ public class Utils {
     }
 
     public static int calculateDescriptionLength(DirectedGraph<StringVertex, StringEdge> g, DirectedGraph<StringVertex, StringEdge> s) {
-        DirectedGraph<StringVertex, StringEdge> compressedGraph = Compressor.compress(g, s);
+        DirectedGraph<StringVertex, StringEdge> compressedGraph = Algorithms.getInstance().compress(g, s);
 
         return calculateDescriptionLength(s) + calculateDescriptionLength(compressedGraph);
     }
@@ -58,6 +59,18 @@ public class Utils {
         return uniqueSetByGraphIsomorphism(graphSet);
     }
 
+    public static boolean containsSubstructure(List<DirectedGraph<StringVertex, StringEdge>> substructureInstances,
+                                               DirectedGraph<StringVertex, StringEdge> instance) {
+        for (DirectedGraph<StringVertex, StringEdge> substructureInstance : substructureInstances) {
+            Set<StringVertex> intersection = new HashSet<>(substructureInstance.vertexSet()); // use the copy constructor
+            intersection.retainAll(instance.vertexSet());
+            if (intersection.size() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     static Set<StringEdge> loadEdges(DirectedGraph<StringVertex, StringEdge> g, Set<StringVertex> loadedVertices) {
         Set<StringEdge> edges = new HashSet<>();
         Set<StringEdge> allEdges = g.edgeSet();
@@ -82,17 +95,5 @@ public class Utils {
         }
 
         return properVertices;
-    }
-
-    public static boolean containsSubstructure(List<DirectedGraph<StringVertex, StringEdge>> substructureInstances,
-                                               DirectedGraph<StringVertex, StringEdge> instance) {
-        for (DirectedGraph<StringVertex, StringEdge> substructureInstance : substructureInstances) {
-            Set<StringVertex> intersection = new HashSet<>(substructureInstance.vertexSet()); // use the copy constructor
-            intersection.retainAll(instance.vertexSet());
-            if (intersection.size() > 0) {
-                return true;
-            }
-        }
-        return false;
     }
 }

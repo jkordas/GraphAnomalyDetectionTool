@@ -1,10 +1,10 @@
-1. Dodac unit testy
-    GBAD-MDL
-    GBAD-MPs
-    GBAD-P
+
 3. Dodac interfejsy do wszystkich klas z pakietu helper
-5. Dodac template method jezeli ma sens dla algorytmow GBAD
+5. Dodac template method jezeli ma sens dla algorytmow GBAD??
 2. Dodac interface dla IsomorphismDetectora i wykorzystac go w fukncji findInstance
+
+zastanowic sie czy DeepCopy jest potrzebne
+
 
 //liczba wierzcholkow
 ID ETYKIETA

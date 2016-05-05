@@ -1,6 +1,5 @@
 package GAD.algorithms;
 
-import GAD.algorithms.helper.BestSubstructureFinder;
 import GAD.algorithms.helper.InstanceFinder;
 import GAD.algorithms.helper.StructureExtender;
 import GAD.algorithms.helper.Utils;
@@ -21,7 +20,7 @@ public class GBAD_P {
 
     public static List<Anomaly> findAnomalies(DirectedGraph<StringVertex, StringEdge> g) {
         List<Anomaly> anomalies = new LinkedList<>();
-        List<DirectedGraph<StringVertex, StringEdge>> bestSubstructures = BestSubstructureFinder.bestSubstructures(g,
+        List<DirectedGraph<StringVertex, StringEdge>> bestSubstructures = Algorithms.getInstance().bestSubstructures(g,
                 BEST_SUBSTRUCTURES_LIMIT);
 
         for (DirectedGraph<StringVertex, StringEdge> bestSubstructure : bestSubstructures) {
