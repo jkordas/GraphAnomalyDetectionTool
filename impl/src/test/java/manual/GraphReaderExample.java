@@ -1,9 +1,9 @@
 package manual;
 
-import graph.StringEdge;
-import graph.StringVertex;
-import graph.Visualisation;
-import io.GraphReader;
+import GAD.graph.StringEdge;
+import GAD.graph.StringVertex;
+import GAD.graph.Visualisation;
+import GAD.io.GraphReader;
 import org.jgrapht.DirectedGraph;
 
 /**

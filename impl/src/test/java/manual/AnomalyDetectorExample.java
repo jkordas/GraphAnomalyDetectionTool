@@ -1,7 +1,8 @@
 package manual;
 
+import GAD.AnomalyDetector;
 import GAD.algorithms.Anomaly;
-import GAD.algorithms.GBAD_MDL;
+import GAD.algorithms.AnomalyType;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import GAD.io.GraphReader;
@@ -10,14 +11,13 @@ import org.jgrapht.DirectedGraph;
 import java.util.List;
 
 /**
- * Created by jkordas on 12/03/16.
+ * Created by jkordas on 05/05/16.
  */
-public class GBAD_MDL_Example {
+public class AnomalyDetectorExample {
     public static void main(String[] args) {
-//        DirectedGraph<StringVertex, StringEdge> g = manual.TestUtils.createCompressGraph();
-        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/MDLGraph.csv");
+        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/MPSGraph.csv");
 
-        List<Anomaly> anomalies = GBAD_MDL.findAnomalies(g);
+        List<Anomaly> anomalies = AnomalyDetector.findAnomalies(AnomalyType.DELETION, g);
         anomalies.sort((a, b) -> a.getValue() < b.getValue() ? -1 : a.getValue() == b.getValue() ? 0 : 1);
 
         for (Anomaly anomaly : anomalies) {

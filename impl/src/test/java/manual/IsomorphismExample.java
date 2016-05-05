@@ -1,8 +1,8 @@
 package manual;
 
-import algorithms.helper.IsomorphismDetector;
-import graph.StringEdge;
-import graph.StringVertex;
+import GAD.algorithms.helper.IsomorphismDetector;
+import GAD.graph.StringEdge;
+import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.SimpleDirectedGraph;
 

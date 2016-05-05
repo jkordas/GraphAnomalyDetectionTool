@@ -1,7 +1,7 @@
-import algorithms.helper.InstanceFinder;
-import algorithms.helper.StructureExtender;
-import graph.StringEdge;
-import graph.StringVertex;
+import GAD.algorithms.helper.InstanceFinder;
+import GAD.algorithms.helper.StructureExtender;
+import GAD.graph.StringEdge;
+import GAD.graph.StringVertex;
 import manual.TestUtils;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DirectedSubgraph;

@@ -1,10 +1,10 @@
 package manual;
 
-import algorithms.helper.Utils;
-import algorithms.helper.BestSubstructureFinder;
-import graph.StringEdge;
-import graph.StringVertex;
-import io.GraphReader;
+import GAD.algorithms.helper.BestSubstructureFinder;
+import GAD.algorithms.helper.Utils;
+import GAD.graph.StringEdge;
+import GAD.graph.StringVertex;
+import GAD.io.GraphReader;
 import org.jgrapht.DirectedGraph;
 
 import java.util.List;

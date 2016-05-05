@@ -1,9 +1,9 @@
 package manual;
 
-import algorithms.helper.Compressor;
-import graph.StringEdge;
-import graph.StringVertex;
-import graph.Visualisation;
+import GAD.algorithms.helper.Compressor;
+import GAD.graph.StringEdge;
+import GAD.graph.StringVertex;
+import GAD.graph.Visualisation;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.SimpleDirectedGraph;
 

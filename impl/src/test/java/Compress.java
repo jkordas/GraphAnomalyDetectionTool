@@ -1,7 +1,7 @@
-import algorithms.helper.Utils;
-import algorithms.helper.Compressor;
-import graph.StringEdge;
-import graph.StringVertex;
+import GAD.algorithms.helper.Compressor;
+import GAD.algorithms.helper.Utils;
+import GAD.graph.StringEdge;
+import GAD.graph.StringVertex;
 import manual.TestUtils;
 import org.jgrapht.DirectedGraph;
 import org.junit.Test;

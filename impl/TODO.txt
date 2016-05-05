@@ -1,12 +1,10 @@
 1. Dodac unit testy
-    graphReader
     GBAD-MDL
     GBAD-MPs
     GBAD-P
-2. Dodac interface dla IsomorphismDetectora i wykorzystac go w fukncji findInstance
 3. Dodac interfejsy do wszystkich klas z pakietu helper
-4. Dodac fasade dla wyboru wykrywania anomalii z enumem (deletions, modifications, additions)
 5. Dodac template method jezeli ma sens dla algorytmow GBAD
+2. Dodac interface dla IsomorphismDetectora i wykorzystac go w fukncji findInstance
 
 //liczba wierzcholkow
 ID ETYKIETA

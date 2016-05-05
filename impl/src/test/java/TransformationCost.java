@@ -1,6 +1,6 @@
-import algorithms.helper.TransformationCostCalculator;
-import graph.StringEdge;
-import graph.StringVertex;
+import GAD.algorithms.helper.TransformationCostCalculator;
+import GAD.graph.StringEdge;
+import GAD.graph.StringVertex;
 import manual.TestUtils;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.SimpleDirectedGraph;

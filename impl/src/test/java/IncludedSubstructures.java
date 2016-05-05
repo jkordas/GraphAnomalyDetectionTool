@@ -1,6 +1,6 @@
-import algorithms.helper.IncludedSubstructuresFinder;
-import graph.StringEdge;
-import graph.StringVertex;
+import GAD.algorithms.helper.IncludedSubstructuresFinder;
+import GAD.graph.StringEdge;
+import GAD.graph.StringVertex;
 import manual.TestUtils;
 import org.jgrapht.DirectedGraph;
 import org.junit.Test;
