@@ -1,9 +1,9 @@
 package GAD.algorithms;
 
-import GAD.algorithms.helper.IncludedSubstructuresFinder;
+import GAD.algorithms.helper.defaultImpl.IncludedSubstructuresFinder;
 import GAD.algorithms.helper.InstanceFinder;
 import GAD.algorithms.helper.TransformationCostCalculator;
-import GAD.algorithms.helper.Utils;
+import GAD.algorithms.helper.defaultImpl.Utils;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -28,7 +28,7 @@ public class GBAD_MPS {
             System.out.println("bestSubstructure: " + bestSubstructure);
 
             List<DirectedGraph<StringVertex, StringEdge>> bestSubstructureInstances = InstanceFinder.findInstances(g, bestSubstructure);
-            List<DirectedGraph<StringVertex, StringEdge>> includedSubstructures = IncludedSubstructuresFinder.includedSubstructures
+            List<DirectedGraph<StringVertex, StringEdge>> includedSubstructures = Algorithms.getInstance().includedSubstructures
                     (bestSubstructure);
 
             List<DirectedGraph<StringVertex, StringEdge>> instances = new LinkedList<>();

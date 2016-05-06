@@ -4,7 +4,6 @@ import GAD.Config;
 import GAD.algorithms.helper.IBestSubstructureFinder;
 import GAD.algorithms.helper.InstanceFinder;
 import GAD.algorithms.helper.StructureExtender;
-import GAD.algorithms.helper.Utils;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;

@@ -1,7 +1,11 @@
 
 3. Dodac interfejsy do wszystkich klas z pakietu helper
 5. Dodac template method jezeli ma sens dla algorytmow GBAD??
-2. Dodac interface dla IsomorphismDetectora i wykorzystac go w fukncji findInstance
+Wygenerowac rozne grafy do testow:
+* liniowy
+* klika
+* gwiazda
+...
 
 zastanowic sie czy DeepCopy jest potrzebne
 

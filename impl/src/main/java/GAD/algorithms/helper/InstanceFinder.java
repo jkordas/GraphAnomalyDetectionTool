@@ -1,5 +1,6 @@
 package GAD.algorithms.helper;
 
+import GAD.algorithms.helper.defaultImpl.Utils;
 import GAD.algorithms.utils.CombinationGenerator;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;

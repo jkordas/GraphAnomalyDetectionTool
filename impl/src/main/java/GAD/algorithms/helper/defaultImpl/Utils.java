@@ -1,6 +1,7 @@
-package GAD.algorithms.helper;
+package GAD.algorithms.helper.defaultImpl;
 
 import GAD.algorithms.Algorithms;
+import GAD.algorithms.helper.IsomorphismDetector;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -71,7 +72,7 @@ public class Utils {
         return false;
     }
 
-    static Set<StringEdge> loadEdges(DirectedGraph<StringVertex, StringEdge> g, Set<StringVertex> loadedVertices) {
+    public static Set<StringEdge> loadEdges(DirectedGraph<StringVertex, StringEdge> g, Set<StringVertex> loadedVertices) {
         Set<StringEdge> edges = new HashSet<>();
         Set<StringEdge> allEdges = g.edgeSet();
 
@@ -86,7 +87,7 @@ public class Utils {
         return edges;
     }
 
-    static Set<StringVertex> loadVertices(StringVertex[] vertices, int[] arr) {
+    public static Set<StringVertex> loadVertices(StringVertex[] vertices, int[] arr) {
         Set<StringVertex> properVertices = new HashSet<>();
         for (int i = 0; i < arr.length; ++i) {
             if (arr[i] == 1) {

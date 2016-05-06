@@ -1,7 +1,7 @@
 package manual.helper;
 
 import GAD.algorithms.Algorithms;
-import GAD.algorithms.helper.Utils;
+import GAD.algorithms.helper.defaultImpl.Utils;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import GAD.io.GraphReader;

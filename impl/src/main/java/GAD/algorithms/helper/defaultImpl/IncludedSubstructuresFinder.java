@@ -1,5 +1,6 @@
-package GAD.algorithms.helper;
+package GAD.algorithms.helper.defaultImpl;
 
+import GAD.algorithms.helper.IIncludedSubstructuresFinder;
 import GAD.algorithms.utils.CombinationGenerator;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
@@ -14,8 +15,9 @@ import java.util.Set;
 /**
  * Created by jkordas on 03/05/16.
  */
-public class IncludedSubstructuresFinder {
-    public static List<DirectedGraph<StringVertex, StringEdge>> includedSubstructures(DirectedGraph<StringVertex, StringEdge> s) {
+public class IncludedSubstructuresFinder implements IIncludedSubstructuresFinder {
+    @Override
+    public List<DirectedGraph<StringVertex, StringEdge>> includedSubstructures(DirectedGraph<StringVertex, StringEdge> s) {
         Set<DirectedGraph<StringVertex, StringEdge>> includedSubstructures = new HashSet<>();
         int n = s.vertexSet().size();
         StringVertex[] sVertices = s.vertexSet().toArray(new StringVertex[n]);
