@@ -48,6 +48,7 @@ public class GBAD_MPS {
             }
         }
 
+        Utils.sortAnomalies(anomalies);
         return anomalies;
     }
 }

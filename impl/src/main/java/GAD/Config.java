@@ -16,7 +16,7 @@ public class Config {
     private Config() {
     }
 
-    public int MAX_SUBSTRUCTURE_SIZE = 8;
+    public int MAX_SUBSTRUCTURE_SIZE = 31;
 
     public final IBestSubstructureFinder BEST_SUBSTRUCTURE_FINDER = new BestSubstructureFinder();
     public final ICompressor COMPRESSOR = new Compressor();

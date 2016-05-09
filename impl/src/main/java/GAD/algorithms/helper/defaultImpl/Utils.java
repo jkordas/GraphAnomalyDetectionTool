@@ -1,6 +1,7 @@
 package GAD.algorithms.helper.defaultImpl;
 
 import GAD.algorithms.Algorithms;
+import GAD.algorithms.Anomaly;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -95,5 +96,9 @@ public class Utils {
         }
 
         return properVertices;
+    }
+
+    public static void sortAnomalies(List<Anomaly> anomalies) {
+        anomalies.sort((a, b) -> a.getValue() < b.getValue() ? -1 : a.getValue() == b.getValue() ? 0 : 1);
     }
 }

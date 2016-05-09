@@ -23,4 +23,9 @@ public class Anomaly {
     public DirectedGraph<StringVertex, StringEdge> getStructure() {
         return structure;
     }
+
+    @Override
+    public String toString() {
+        return "Anomaly value: " + getValue() + "/nStructure: " + getStructure();
+    }
 }

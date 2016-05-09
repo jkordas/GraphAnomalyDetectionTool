@@ -43,6 +43,7 @@ public class GBAD_P {
             }
         }
 
+        Utils.sortAnomalies(anomalies);
         return anomalies;
     }
 }

@@ -1,5 +1,6 @@
 package GAD.algorithms;
 
+import GAD.algorithms.helper.defaultImpl.Utils;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -38,6 +39,7 @@ public class GBAD_MDL {
             }
         }
 
+        Utils.sortAnomalies(anomalies);
         return anomalies;
     }
 }
