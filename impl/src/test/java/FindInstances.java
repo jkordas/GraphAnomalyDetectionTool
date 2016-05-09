@@ -1,4 +1,5 @@
-import GAD.algorithms.helper.InstanceFinder;
+import GAD.algorithms.Algorithms;
+import GAD.algorithms.helper.defaultImpl.InstanceFinder;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import manual.TestUtils;
@@ -22,8 +23,8 @@ public class FindInstances {
         DirectedGraph<StringVertex, StringEdge> s2 = TestUtils.createCompressSubstructure2();
 
 
-        List<DirectedGraph<StringVertex, StringEdge>> instances1 = InstanceFinder.findInstances(g, s1);
-        List<DirectedGraph<StringVertex, StringEdge>> instances2 = InstanceFinder.findInstances(g, s2);
+        List<DirectedGraph<StringVertex, StringEdge>> instances1 = Algorithms.getInstance().findInstances(g, s1);
+        List<DirectedGraph<StringVertex, StringEdge>> instances2 = Algorithms.getInstance().findInstances(g, s2);
 
 
         assertEquals(4, instances1.size());
@@ -72,14 +73,15 @@ public class FindInstances {
         s.addEdge(vs1, vs2);
         s.addEdge(vs2, vs3);
 
-        List<DirectedGraph<StringVertex, StringEdge>> instances1 = InstanceFinder.findInstances(g, s);
+        List<DirectedGraph<StringVertex, StringEdge>> instances1 = Algorithms.getInstance().findInstances(g, s);
         assertEquals(2, instances1.size());
 
         vs1.setLabel("F");
         vs2.setLabel("G");
         vs3.setLabel("H");
-        List<DirectedGraph<StringVertex, StringEdge>> instances2 = InstanceFinder.findInstances(g, s);
-        List<DirectedGraph<StringVertex, StringEdge>> instancesInexact = InstanceFinder.findInstances(g, s, false);
+        List<DirectedGraph<StringVertex, StringEdge>> instances2 = Algorithms.getInstance().findInstances(g, s);
+        List<DirectedGraph<StringVertex, StringEdge>> instancesInexact = Algorithms.getInstance().findInstances(g, s,
+                false);
 
         assertEquals(0, instances2.size());
         assertEquals(4, instancesInexact.size());

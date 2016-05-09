@@ -1,8 +1,5 @@
 package GAD.algorithms;
 
-import GAD.algorithms.helper.defaultImpl.IncludedSubstructuresFinder;
-import GAD.algorithms.helper.InstanceFinder;
-import GAD.algorithms.helper.TransformationCostCalculator;
 import GAD.algorithms.helper.defaultImpl.Utils;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
@@ -27,20 +24,20 @@ public class GBAD_MPS {
         for (DirectedGraph<StringVertex, StringEdge> bestSubstructure : bestSubstructures) {
             System.out.println("bestSubstructure: " + bestSubstructure);
 
-            List<DirectedGraph<StringVertex, StringEdge>> bestSubstructureInstances = InstanceFinder.findInstances(g, bestSubstructure);
+            List<DirectedGraph<StringVertex, StringEdge>> bestSubstructureInstances = Algorithms.getInstance().findInstances(g, bestSubstructure);
             List<DirectedGraph<StringVertex, StringEdge>> includedSubstructures = Algorithms.getInstance().includedSubstructures
                     (bestSubstructure);
 
             List<DirectedGraph<StringVertex, StringEdge>> instances = new LinkedList<>();
             for (DirectedGraph<StringVertex, StringEdge> includedSubstructure : includedSubstructures) {
-                instances.addAll(InstanceFinder.findInstances(g, includedSubstructure));
+                instances.addAll(Algorithms.getInstance().findInstances(g, includedSubstructure));
             }
 
             for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
                 System.out.println("instance: " + instance);
                 if(!Utils.containsSubstructure(bestSubstructureInstances, instance)) {
-                    int frequency = InstanceFinder.findInstances(g, instance).size() - bestSubstructureInstances.size();
-                    int cost = TransformationCostCalculator.subgraphTransformationCost(instance, bestSubstructure);
+                    int frequency = Algorithms.getInstance().findInstances(g, instance).size() - bestSubstructureInstances.size();
+                    int cost = Algorithms.getInstance().subgraphTransformationCost(instance, bestSubstructure);
 
                     int anomalyValue = frequency * cost;
                     System.out.println(anomalyValue);

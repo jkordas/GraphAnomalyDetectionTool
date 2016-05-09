@@ -1,6 +1,7 @@
-package GAD.algorithms.helper;
+package GAD.algorithms.helper.defaultImpl;
 
-import GAD.algorithms.helper.defaultImpl.Utils;
+import GAD.algorithms.Algorithms;
+import GAD.algorithms.helper.IInstanceFinder;
 import GAD.algorithms.utils.CombinationGenerator;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
@@ -14,15 +15,12 @@ import java.util.Set;
 /**
  * Created by jkordas on 24/04/16.
  */
-public class InstanceFinder {
-    public static List<DirectedGraph<StringVertex, StringEdge>> findInstances(DirectedGraph<StringVertex, StringEdge> g,
-                                                                              DirectedGraph<StringVertex, StringEdge> substructure) {
-        return findInstances(g, substructure, true);
-    }
-
-    public static List<DirectedGraph<StringVertex, StringEdge>> findInstances(DirectedGraph<StringVertex, StringEdge> g,
-                                                                              DirectedGraph<StringVertex, StringEdge> substructure,
-                                                                              boolean exactMatch) {
+public class InstanceFinder implements IInstanceFinder {
+    @Override
+    public List<DirectedGraph<StringVertex, StringEdge>> findInstances(DirectedGraph<StringVertex, StringEdge> g,
+                                                                       DirectedGraph<StringVertex, StringEdge>
+                                                                               substructure,
+                                                                       boolean exactMatch) {
         List<DirectedGraph<StringVertex, StringEdge>> instanceList = new LinkedList<>();
         Set<StringVertex> subVertices = substructure.vertexSet();
         //TODO: filter vertices properly, equals cannot be overridden
@@ -38,11 +36,11 @@ public class InstanceFinder {
 
             //TODO: interface
             if (exactMatch) {
-                if (IsomorphismDetector.isIsomorphic(loadedGraph, substructure)) {
+                if (Algorithms.getInstance().isIsomorphic(loadedGraph, substructure)) {
                     instanceList.add(loadedGraph);
                 }
             } else {
-                if (IsomorphismDetector.isTopologicallyIsomorphic(loadedGraph, substructure)) {
+                if (Algorithms.getInstance().isTopologicallyIsomorphic(loadedGraph, substructure)) {
                     instanceList.add(loadedGraph);
                 }
             }

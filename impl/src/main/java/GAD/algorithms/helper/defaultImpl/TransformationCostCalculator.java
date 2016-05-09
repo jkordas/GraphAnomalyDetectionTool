@@ -1,5 +1,6 @@
-package GAD.algorithms.helper;
+package GAD.algorithms.helper.defaultImpl;
 
+import GAD.algorithms.helper.ITransformationCostCalculator;
 import GAD.algorithms.utils.PermutationGenerator;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
@@ -13,9 +14,10 @@ import java.util.Set;
 /**
  * Created by jkordas on 30/04/16.
  */
-public class TransformationCostCalculator {
-    public static int transformationCost(DirectedGraph<StringVertex, StringEdge> g1, DirectedGraph<StringVertex, StringEdge> g2) {
-        if(g1.vertexSet().size() != g2.vertexSet().size()){
+public class TransformationCostCalculator implements ITransformationCostCalculator {
+    @Override
+    public int transformationCost(DirectedGraph<StringVertex, StringEdge> g1, DirectedGraph<StringVertex, StringEdge> g2) {
+        if (g1.vertexSet().size() != g2.vertexSet().size()) {
             throw new IllegalArgumentException("Graph g1 and g2 must have the same vertex number.");
         }
         int size = g1.vertexSet().size();
@@ -25,13 +27,13 @@ public class TransformationCostCalculator {
         StringVertex[] vertices2 = g2.vertexSet().toArray(new StringVertex[size]);
 
         PermutationGenerator permutationGenerator = new PermutationGenerator(size);
-        while(permutationGenerator.hasNext()) {
+        while (permutationGenerator.hasNext()) {
             int cost = 0;
-            int [] permutation = permutationGenerator.next();
+            int[] permutation = permutationGenerator.next();
             Map<StringVertex, StringVertex> g1ToG2 = new HashMap<>();
             Map<StringVertex, StringVertex> g2ToG1 = new HashMap<>();
 
-            for(int i = 0; i < size; ++i) {
+            for (int i = 0; i < size; ++i) {
                 g1ToG2.put(vertices1[i], vertices2[permutation[i]]);
                 g2ToG1.put(vertices2[permutation[i]], vertices1[i]);
             }
@@ -47,7 +49,7 @@ public class TransformationCostCalculator {
             //wierzcholki
             cost += getVerticesCost(g1.vertexSet(), mapping);
 
-            if(cost < minCost) {
+            if (cost < minCost) {
                 minCost = cost;
             }
         }
@@ -55,7 +57,8 @@ public class TransformationCostCalculator {
         return minCost;
     }
 
-    public static int subgraphTransformationCost(DirectedGraph<StringVertex, StringEdge> s, DirectedGraph<StringVertex, StringEdge> g) {
+    @Override
+    public int subgraphTransformationCost(DirectedGraph<StringVertex, StringEdge> s, DirectedGraph<StringVertex, StringEdge> g) {
         //assume s is subgraph of g
 
         //missing edge/vertex +1
@@ -63,12 +66,12 @@ public class TransformationCostCalculator {
         return 2 * (g.vertexSet().size() - s.vertexSet().size() + g.edgeSet().size() - s.edgeSet().size());
     }
 
-        private static int getEdgesCost(Set<StringEdge> edgeSet, DefaultGraphMapping<StringVertex, StringEdge> mapping, boolean forward) {
+    private int getEdgesCost(Set<StringEdge> edgeSet, DefaultGraphMapping<StringVertex, StringEdge> mapping, boolean forward) {
         int cost = 0;
         for (StringEdge edge : edgeSet) {
             StringEdge edgeCorrespondence = mapping.getEdgeCorrespondence(edge, forward);
-            if(edgeCorrespondence != null) {
-                if(!edge.getLabel().equals(edgeCorrespondence.getLabel())){
+            if (edgeCorrespondence != null) {
+                if (!edge.getLabel().equals(edgeCorrespondence.getLabel())) {
                     cost++;
                 }
             } else {
@@ -78,13 +81,13 @@ public class TransformationCostCalculator {
         return cost;
     }
 
-    private static int getVerticesCost(Set<StringVertex> vertexSet, DefaultGraphMapping<StringVertex, StringEdge> mapping) {
+    private int getVerticesCost(Set<StringVertex> vertexSet, DefaultGraphMapping<StringVertex, StringEdge> mapping) {
         int cost = 0;
 
         for (StringVertex vertex : vertexSet) {
             StringVertex vertexCorrespondence = mapping.getVertexCorrespondence(vertex, true);
-            if(vertexCorrespondence != null) {
-                if(!vertex.getLabel().equals(vertexCorrespondence.getLabel())){
+            if (vertexCorrespondence != null) {
+                if (!vertex.getLabel().equals(vertexCorrespondence.getLabel())) {
                     cost++;
                 }
             } else {

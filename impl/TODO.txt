@@ -1,10 +1,11 @@
 
-3. Dodac interfejsy do wszystkich klas z pakietu helper
 5. Dodac template method jezeli ma sens dla algorytmow GBAD??
 Wygenerowac rozne grafy do testow:
 * liniowy
 * klika
 * gwiazda
+* gwiazda zamknieta (kolo)
+* grid
 ...
 
 zastanowic sie czy DeepCopy jest potrzebne

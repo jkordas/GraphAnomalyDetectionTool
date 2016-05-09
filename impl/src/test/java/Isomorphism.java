@@ -1,4 +1,5 @@
-import GAD.algorithms.helper.IsomorphismDetector;
+import GAD.algorithms.Algorithms;
+import GAD.algorithms.helper.defaultImpl.IsomorphismDetector;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -31,10 +32,10 @@ public class Isomorphism {
         g2.addEdge(a2, b2, e2);
 
 
-        assertEquals(true, IsomorphismDetector.isIsomorphic(g1, g2));
+        assertEquals(true, Algorithms.getInstance().isIsomorphic(g1, g2));
 
         g1.addVertex(new StringVertex("C"));
-        assertEquals(false, IsomorphismDetector.isIsomorphic(g1, g2));
+        assertEquals(false, Algorithms.getInstance().isIsomorphic(g1, g2));
     }
 
 

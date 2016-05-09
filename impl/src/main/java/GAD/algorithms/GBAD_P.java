@@ -1,7 +1,5 @@
 package GAD.algorithms;
 
-import GAD.algorithms.helper.InstanceFinder;
-import GAD.algorithms.helper.StructureExtender;
 import GAD.algorithms.helper.defaultImpl.Utils;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
@@ -27,15 +25,15 @@ public class GBAD_P {
             System.out.println("bestSubstructure: " + bestSubstructure);
 
             List<DirectedGraph<StringVertex, StringEdge>> extendedStructures = new LinkedList<>();
-            List<DirectedGraph<StringVertex, StringEdge>> instances = InstanceFinder.findInstances(g, bestSubstructure);
+            List<DirectedGraph<StringVertex, StringEdge>> instances = Algorithms.getInstance().findInstances(g, bestSubstructure);
             for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
-                extendedStructures.addAll(StructureExtender.extendStructure(g, instance));
+                extendedStructures.addAll(Algorithms.getInstance().extendStructure(g, instance));
             }
             extendedStructures = new LinkedList<>(Utils.uniqueSetByGraphIsomorphism(extendedStructures));
 
             for (DirectedGraph<StringVertex, StringEdge> extendedStructure : extendedStructures) {
                 System.out.println("extendedStructure: " + extendedStructure);
-                float frequency = InstanceFinder.findInstances(g, extendedStructure).size();
+                float frequency = Algorithms.getInstance().findInstances(g, extendedStructure).size();
                 int probability = (int) (frequency / extendedStructures.size() * 100);
                 System.out.println("extension probability: " + probability + " %");
 

@@ -1,5 +1,6 @@
-package GAD.algorithms.helper;
+package GAD.algorithms.helper.defaultImpl;
 
+import GAD.algorithms.helper.IStructureExtender;
 import GAD.algorithms.utils.PreparedStringEdge;
 import GAD.algorithms.utils.deepCopy.DeepCopy;
 import GAD.graph.StringEdge;
@@ -15,9 +16,10 @@ import java.util.Set;
 /**
  * Created by jkordas on 2016-04-27.
  */
-public class StructureExtender {
-    public static List<DirectedGraph<StringVertex, StringEdge>> extendStructure(Graph<StringVertex, StringEdge> g,
-                                                                                Graph<StringVertex, StringEdge> s) {
+public class StructureExtender implements IStructureExtender {
+    @Override
+    public List<DirectedGraph<StringVertex, StringEdge>> extendStructure(Graph<StringVertex, StringEdge> g,
+                                                                         Graph<StringVertex, StringEdge> s) {
         List<DirectedGraph<StringVertex, StringEdge>> extendedStructures = new LinkedList<>();
         Set<StringEdge> edges = g.edgeSet();
 
@@ -68,19 +70,19 @@ public class StructureExtender {
         return extendedStructures;
     }
 
-    private static void removeAbsentEdges(Graph<StringVertex, StringEdge> s, Set<PreparedStringEdge> absentEdges) {
+    private void removeAbsentEdges(Graph<StringVertex, StringEdge> s, Set<PreparedStringEdge> absentEdges) {
         for (PreparedStringEdge absentEdge : absentEdges) {
             s.removeEdge(absentEdge.getSource(), absentEdge.getTarget());
         }
     }
 
-    private static void addAbsentEdges(Graph<StringVertex, StringEdge> s, Set<PreparedStringEdge> absentEdges) {
+    private void addAbsentEdges(Graph<StringVertex, StringEdge> s, Set<PreparedStringEdge> absentEdges) {
         for (PreparedStringEdge absentEdge : absentEdges) {
             s.addEdge(absentEdge.getSource(), absentEdge.getTarget(), absentEdge.getEdge());
         }
     }
 
-    private static Set<PreparedStringEdge> getAbsentEdges(Graph<StringVertex, StringEdge> g, Graph<StringVertex, StringEdge> s) {
+    private Set<PreparedStringEdge> getAbsentEdges(Graph<StringVertex, StringEdge> g, Graph<StringVertex, StringEdge> s) {
         Set<PreparedStringEdge> absentEdges = new HashSet<>();
         Set<StringVertex> sVertexSet = s.vertexSet();
 

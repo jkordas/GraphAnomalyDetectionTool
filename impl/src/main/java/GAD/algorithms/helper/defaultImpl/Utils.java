@@ -1,7 +1,6 @@
 package GAD.algorithms.helper.defaultImpl;
 
 import GAD.algorithms.Algorithms;
-import GAD.algorithms.helper.IsomorphismDetector;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -38,7 +37,7 @@ public class Utils {
         for (DirectedGraph<StringVertex, StringEdge> graph : graphSet) {
             boolean shouldBeAdded = true;
             for (DirectedGraph<StringVertex, StringEdge> uniqueGraph : uniqueGraphSet) {
-                if (IsomorphismDetector.isIsomorphic(graph, uniqueGraph)) {
+                if (Algorithms.getInstance().isIsomorphic(graph, uniqueGraph)) {
                     shouldBeAdded = false;
                     break;
                 }

@@ -1,4 +1,4 @@
-import GAD.algorithms.helper.TransformationCostCalculator;
+import GAD.algorithms.Algorithms;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import manual.TestUtils;
@@ -33,13 +33,13 @@ public class TransformationCost {
         g2.addEdge(vs1, vs2);
         g2.addEdge(vs2, vs3);
 
-        assertEquals(TransformationCostCalculator.transformationCost(g1, g2), 0);
+        assertEquals(Algorithms.getInstance().transformationCost(g1, g2), 0);
 
         g2.addEdge(vs1, vs3);
-        assertEquals(TransformationCostCalculator.transformationCost(g1, g2), 2);
+        assertEquals(Algorithms.getInstance().transformationCost(g1, g2), 2);
 
         vs1.setLabel("4");
-        assertEquals(TransformationCostCalculator.transformationCost(g1, g2), 3);
+        assertEquals(Algorithms.getInstance().transformationCost(g1, g2), 3);
     }
 
     @Test
@@ -70,9 +70,9 @@ public class TransformationCost {
         g2.addEdge(vs4, vs5);
         g2.addEdge(vs1, vs4);
 
-        assertEquals(TransformationCostCalculator.transformationCost(g1, g2), 0);
+        assertEquals(Algorithms.getInstance().transformationCost(g1, g2), 0);
 
         g2.addEdge(vs4, vs1);
-        assertEquals(TransformationCostCalculator.transformationCost(g1, g2), 2);
+        assertEquals(Algorithms.getInstance().transformationCost(g1, g2), 2);
     }
 }

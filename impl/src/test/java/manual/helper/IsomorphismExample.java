@@ -1,6 +1,7 @@
 package manual.helper;
 
-import GAD.algorithms.helper.IsomorphismDetector;
+import GAD.algorithms.Algorithms;
+import GAD.algorithms.helper.defaultImpl.IsomorphismDetector;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -35,7 +36,7 @@ public class IsomorphismExample {
         g2.addEdge(b2, c2);
         g2.addEdge(c2, a2);
 
-        IsomorphismDetector.isIsomorphic(g1, g2);
+        Algorithms.getInstance().isIsomorphic(g1, g2);
     }
 
 }

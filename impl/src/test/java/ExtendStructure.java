@@ -1,5 +1,4 @@
-import GAD.algorithms.helper.InstanceFinder;
-import GAD.algorithms.helper.StructureExtender;
+import GAD.algorithms.Algorithms;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import manual.TestUtils;
@@ -25,10 +24,10 @@ public class ExtendStructure {
         DirectedGraph<StringVertex, StringEdge> s = TestUtils.createCompressSubstructure1();
 
         int extendedSubstructuresNumber = 0;
-        List<DirectedGraph<StringVertex, StringEdge>> instances = InstanceFinder.findInstances(g, s);
+        List<DirectedGraph<StringVertex, StringEdge>> instances = Algorithms.getInstance().findInstances(g, s);
         for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
 
-            List<DirectedGraph<StringVertex, StringEdge>> extendedStructures = StructureExtender.extendStructure(g, instance);
+            List<DirectedGraph<StringVertex, StringEdge>> extendedStructures = Algorithms.getInstance().extendStructure(g, instance);
             extendedSubstructuresNumber += extendedStructures.size();
         }
 
@@ -57,7 +56,7 @@ public class ExtendStructure {
 
         DirectedSubgraph<StringVertex, StringEdge> sub = new DirectedSubgraph<>(g2, new HashSet<>(Arrays.asList(v1, v2, v3)),
                 new HashSet<>(Arrays.asList(e1, e2)));
-        List<DirectedGraph<StringVertex, StringEdge>> extendedStructures2 = StructureExtender.extendStructure(g2, sub);
+        List<DirectedGraph<StringVertex, StringEdge>> extendedStructures2 = Algorithms.getInstance().extendStructure(g2, sub);
 
         assertEquals(3, extendedStructures2.get(0).edgeSet().size());
     }

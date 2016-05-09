@@ -1,9 +1,8 @@
 package GAD.algorithms.helper.defaultImpl;
 
 import GAD.Config;
+import GAD.algorithms.Algorithms;
 import GAD.algorithms.helper.IBestSubstructureFinder;
-import GAD.algorithms.helper.InstanceFinder;
-import GAD.algorithms.helper.StructureExtender;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -35,9 +34,11 @@ public class BestSubstructureFinder implements IBestSubstructureFinder {
 
             while (!parentList.isEmpty()) {
                 DirectedGraph<StringVertex, StringEdge> s = parentList.remove(0);
-                List<DirectedGraph<StringVertex, StringEdge>> instances = InstanceFinder.findInstances(graph, s);
+                List<DirectedGraph<StringVertex, StringEdge>> instances = Algorithms.getInstance().findInstances
+                        (graph, s);
                 for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
-                    List<DirectedGraph<StringVertex, StringEdge>> extendedStructure = StructureExtender.extendStructure(graph, instance);
+                    List<DirectedGraph<StringVertex, StringEdge>> extendedStructure = Algorithms.getInstance().extendStructure(graph,
+                            instance);
                     childList.addAll(extendedStructure);
                 }
 

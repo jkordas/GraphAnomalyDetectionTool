@@ -1,7 +1,5 @@
 package GAD.algorithms;
 
-import GAD.algorithms.helper.InstanceFinder;
-import GAD.algorithms.helper.TransformationCostCalculator;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -25,12 +23,13 @@ public class GBAD_MDL {
         for (DirectedGraph<StringVertex, StringEdge> bestSubstructure : bestSubstructures) {
             System.out.println("bestSubstructure: " + bestSubstructure);
 
-            List<DirectedGraph<StringVertex, StringEdge>> instances = InstanceFinder.findInstances(g, bestSubstructure, false);
+            List<DirectedGraph<StringVertex, StringEdge>> instances = Algorithms.getInstance().findInstances(g,
+                    bestSubstructure, false);
 
             for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
                 System.out.println("instance: " + instance);
-                int frequency = InstanceFinder.findInstances(g, instance).size();
-                int cost = TransformationCostCalculator.transformationCost(instance, bestSubstructure);
+                int frequency = Algorithms.getInstance().findInstances(g, instance).size();
+                int cost = Algorithms.getInstance().transformationCost(instance, bestSubstructure);
 
                 int anomalyValue = frequency * cost;
                 if (anomalyValue > 0 && anomalyValue < THRESHOLD) {

@@ -1,11 +1,7 @@
 package GAD;
 
-import GAD.algorithms.helper.IBestSubstructureFinder;
-import GAD.algorithms.helper.ICompressor;
-import GAD.algorithms.helper.IIncludedSubstructuresFinder;
-import GAD.algorithms.helper.defaultImpl.BestSubstructureFinder;
-import GAD.algorithms.helper.defaultImpl.Compressor;
-import GAD.algorithms.helper.defaultImpl.IncludedSubstructuresFinder;
+import GAD.algorithms.helper.*;
+import GAD.algorithms.helper.defaultImpl.*;
 
 /**
  * Created by jkordas on 05/05/16.
@@ -22,7 +18,11 @@ public class Config {
 
     public int MAX_SUBSTRUCTURE_SIZE = 8;
 
-    public IBestSubstructureFinder BEST_SUBSTRUCTURE_FINDER = new BestSubstructureFinder();
-    public ICompressor COMPRESSOR = new Compressor();
-    public IIncludedSubstructuresFinder INCLUDED_SUBSTRUCTURE_FINDER = new IncludedSubstructuresFinder();
+    public final IBestSubstructureFinder BEST_SUBSTRUCTURE_FINDER = new BestSubstructureFinder();
+    public final ICompressor COMPRESSOR = new Compressor();
+    public final IIncludedSubstructuresFinder INCLUDED_SUBSTRUCTURE_FINDER = new IncludedSubstructuresFinder();
+    public final IInstanceFinder INSTANCE_FINDER = new InstanceFinder();
+    public final IIsomorphismDetector ISOMORPHISM_DETECTOR = new IsomorphismDetector();
+    public final IStructureExtender STRUCTURE_EXTENDER = new StructureExtender();
+    public final ITransformationCostCalculator TRANSFORMATION_COST_CALCULATOR = new TransformationCostCalculator();
 }

@@ -1,7 +1,7 @@
 package GAD.algorithms.helper.defaultImpl;
 
+import GAD.algorithms.Algorithms;
 import GAD.algorithms.helper.ICompressor;
-import GAD.algorithms.helper.InstanceFinder;
 import GAD.algorithms.utils.PreparedStringEdge;
 import GAD.algorithms.utils.deepCopy.DeepCopy;
 import GAD.graph.StringEdge;
@@ -20,7 +20,8 @@ public class Compressor implements ICompressor {
     public DirectedGraph<StringVertex, StringEdge> compress(DirectedGraph<StringVertex, StringEdge> g,
                                                                    DirectedGraph<StringVertex, StringEdge> substructure) {
         DirectedGraph<StringVertex, StringEdge> compressedGraph = (DirectedGraph<StringVertex, StringEdge>) DeepCopy.copy(g);
-        List<DirectedGraph<StringVertex, StringEdge>> instances = InstanceFinder.findInstances(compressedGraph, substructure);
+        List<DirectedGraph<StringVertex, StringEdge>> instances = Algorithms.getInstance().findInstances
+                (compressedGraph, substructure);
         Set<StringEdge> edges = compressedGraph.edgeSet();
         List<StringEdge> edgesToRemove = new LinkedList<>();
         List<PreparedStringEdge> edgesToAdd = new LinkedList<>();
