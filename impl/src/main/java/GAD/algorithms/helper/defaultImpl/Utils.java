@@ -56,7 +56,6 @@ public class Utils {
             List<DirectedGraph<StringVertex, StringEdge>> graph) {
         Set<DirectedGraph<StringVertex, StringEdge>> graphSet = new HashSet<>(graph);
 
-
         return uniqueSetByGraphIsomorphism(graphSet);
     }
 

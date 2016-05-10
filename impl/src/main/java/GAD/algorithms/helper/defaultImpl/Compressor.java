@@ -27,7 +27,8 @@ public class Compressor implements ICompressor {
         List<PreparedStringEdge> edgesToAdd = new LinkedList<>();
 
         for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
-            StringVertex instanceReplaceVertex = new StringVertex("");//TODO vertex label
+            //NOTE: vertex label can be set to something more meaningful
+            StringVertex instanceReplaceVertex = new StringVertex("");
             compressedGraph.addVertex(instanceReplaceVertex);
 
             for (StringEdge edge : edges) {
@@ -48,8 +49,7 @@ public class Compressor implements ICompressor {
                     edgesToRemove.add(edge);
                 }
 
-                //jezeli ktoras z oczekujacych krawedzi nalezy do usuwanej instancji to trzeba podmienic wierzcholek
-                // na nowy
+                //if some edge waiting to be added is connected to replaced instance, instance vertex have to be changed
                 for (PreparedStringEdge preparedEdge : edgesToAdd) {
                     if (instance.containsVertex(preparedEdge.getSource())) {
                         preparedEdge.setSource(instanceReplaceVertex);

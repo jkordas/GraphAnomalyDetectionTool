@@ -8,7 +8,6 @@ import GAD.algorithms.helper.defaultImpl.*;
  */
 public class Config {
     private static Config ourInstance = new Config();
-
     public static Config getInstance() {
         return ourInstance;
     }
@@ -16,7 +15,11 @@ public class Config {
     private Config() {
     }
 
-    public int MAX_SUBSTRUCTURE_SIZE = 31;
+    public final int MAX_SUBSTRUCTURE_SIZE = 8;
+    public final int BEST_SUBSTRUCTURES_LIMIT = 1;
+    public final int GBAD_P_THRESHOLD = 20;
+    public final int GBAD_MDL_THRESHOLD = 10;
+    public final int GBAD_MPS_THRESHOLD = 10;
 
     public final IBestSubstructureFinder BEST_SUBSTRUCTURE_FINDER = new BestSubstructureFinder();
     public final ICompressor COMPRESSOR = new Compressor();

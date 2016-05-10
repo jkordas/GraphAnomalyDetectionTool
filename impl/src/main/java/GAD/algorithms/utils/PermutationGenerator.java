@@ -79,13 +79,4 @@ public class PermutationGenerator {
         return findIndexK() >= 0;
     }
 
-    public static void main(String[] args) {
-        PermutationGenerator generator = new PermutationGenerator(10);
-
-        while(generator.hasNext()){
-//            System.out.println(Arrays.toString(generator.next()));
-            generator.next();
-        }
-    }
-
 }

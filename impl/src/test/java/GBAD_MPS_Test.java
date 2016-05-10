@@ -18,7 +18,7 @@ public class GBAD_MPS_Test {
     public void simpleTest() {
         DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/MPSGraph.csv");
 
-        List<Anomaly> anomalies = GBAD_MPS.findAnomalies(g);
+        List<Anomaly> anomalies = GBAD_MPS.getInstance().findAnomalies(g);
         assertEquals(1, anomalies.size());
     }
 }

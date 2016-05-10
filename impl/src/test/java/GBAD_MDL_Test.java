@@ -18,7 +18,7 @@ public class GBAD_MDL_Test {
     public void simpleTest() {
         DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/MDLGraph.csv");
 
-        List<Anomaly> anomalies = GBAD_MDL.findAnomalies(g);
+        List<Anomaly> anomalies = GBAD_MDL.getInstance().findAnomalies(g);
         assertEquals(3, anomalies.size());
     }
 }

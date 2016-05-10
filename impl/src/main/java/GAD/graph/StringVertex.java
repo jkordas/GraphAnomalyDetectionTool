@@ -25,12 +25,5 @@ public class StringVertex implements Serializable{
         return label;
     }
 
-//    @Override
-//    public boolean equals(Object obj) {
-//        if(!(obj instanceof StringVertex)){
-//            return false;
-//        }
-//        StringVertex s = (StringVertex) obj;
-//        return s.getLabel().equals(label);
-//    }
+    //NOTE: equals cannot be overridden because jgrapht algorithms wont work correctly
 }

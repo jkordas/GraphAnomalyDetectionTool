@@ -1,7 +1,5 @@
 package GAD.algorithms.utils;
 
-import java.util.Arrays;
-
 /**
  * Created by jkordas on 08/04/16.
  */
@@ -87,15 +85,5 @@ public class CombinationGenerator {
             }
         }
         return lastIndex >= k;
-    }
-
-    //TODO: change to unit test
-    public static void main(String[] args) {
-        CombinationGenerator g = new CombinationGenerator(7, 4);
-
-        while (g.hasNext()){
-            System.out.println(Arrays.toString(g.next()));
-        }
-
     }
 }

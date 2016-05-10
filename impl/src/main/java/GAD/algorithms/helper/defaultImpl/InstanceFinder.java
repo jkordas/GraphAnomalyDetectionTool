@@ -18,29 +18,30 @@ import java.util.Set;
 public class InstanceFinder implements IInstanceFinder {
     @Override
     public List<DirectedGraph<StringVertex, StringEdge>> findInstances(DirectedGraph<StringVertex, StringEdge> g,
-                                                                       DirectedGraph<StringVertex, StringEdge>
-                                                                               substructure,
+                                                                       DirectedGraph<StringVertex, StringEdge> s,
                                                                        boolean exactMatch) {
         List<DirectedGraph<StringVertex, StringEdge>> instanceList = new LinkedList<>();
-        Set<StringVertex> subVertices = substructure.vertexSet();
-        //TODO: filter vertices properly, equals cannot be overridden
-        //Subgraph<StringVertex, StringEdge, Graph<StringVertex, StringEdge>> gReduced = new Subgraph<>(g, subVertices);
+        Set<StringVertex> sVertices = s.vertexSet();
+        //NOTE: performance can be improved
+        //reduce original graph to vertices contained in s
+//        Set<StringVertex> gReducedVertices = new HashSet<>(g.vertexSet());
+//        gReducedVertices.retainAll(sVertices);
+//        DirectedSubgraph<StringVertex, StringEdge> gReduced = new DirectedSubgraph<>(g, gReducedVertices, g.edgeSet());
 
         StringVertex[] gVertices = g.vertexSet().toArray(new StringVertex[g.vertexSet().size()]);
-        CombinationGenerator combinationGenerator = new CombinationGenerator(gVertices.length, subVertices.size());
+        CombinationGenerator combinationGenerator = new CombinationGenerator(gVertices.length, sVertices.size());
 
         while (combinationGenerator.hasNext()) {
             Set<StringVertex> loadedVertices = Utils.loadVertices(gVertices, combinationGenerator.next());
             Set<StringEdge> loadedEdges = Utils.loadEdges(g, loadedVertices);
             DirectedSubgraph<StringVertex, StringEdge> loadedGraph = new DirectedSubgraph<>(g, loadedVertices, loadedEdges);
 
-            //TODO: interface
             if (exactMatch) {
-                if (Algorithms.getInstance().isIsomorphic(loadedGraph, substructure)) {
+                if (Algorithms.getInstance().isIsomorphic(loadedGraph, s)) {
                     instanceList.add(loadedGraph);
                 }
             } else {
-                if (Algorithms.getInstance().isTopologicallyIsomorphic(loadedGraph, substructure)) {
+                if (Algorithms.getInstance().isTopologicallyIsomorphic(loadedGraph, s)) {
                     instanceList.add(loadedGraph);
                 }
             }

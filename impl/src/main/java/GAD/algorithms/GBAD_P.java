@@ -1,5 +1,6 @@
 package GAD.algorithms;
 
+import GAD.Config;
 import GAD.algorithms.helper.defaultImpl.Utils;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
@@ -11,39 +12,41 @@ import java.util.List;
 /**
  * Created by jkordas on 12/03/16.
  */
-public class GBAD_P {
-    //TODO: move params to config
-    private static final int THRESHOLD = 20;
-    private static final int BEST_SUBSTRUCTURES_LIMIT = 1;
+public class GBAD_P extends GBAD_Algorithm {
+    private static final int THRESHOLD = Config.getInstance().GBAD_P_THRESHOLD;
 
-    public static List<Anomaly> findAnomalies(DirectedGraph<StringVertex, StringEdge> g) {
+    private static GBAD_P ourInstance = new GBAD_P();
+
+    public static GBAD_P getInstance() {
+        return ourInstance;
+    }
+
+    private GBAD_P() {
+    }
+
+    @Override
+    List<Anomaly> findAnomaliesForSubstructure(DirectedGraph<StringVertex, StringEdge> g,
+                                               DirectedGraph<StringVertex, StringEdge> bestSubstructure) {
         List<Anomaly> anomalies = new LinkedList<>();
-        List<DirectedGraph<StringVertex, StringEdge>> bestSubstructures = Algorithms.getInstance().bestSubstructures(g,
-                BEST_SUBSTRUCTURES_LIMIT);
 
-        for (DirectedGraph<StringVertex, StringEdge> bestSubstructure : bestSubstructures) {
-            System.out.println("bestSubstructure: " + bestSubstructure);
+        List<DirectedGraph<StringVertex, StringEdge>> extendedStructures = new LinkedList<>();
+        List<DirectedGraph<StringVertex, StringEdge>> instances = Algorithms.getInstance().findInstances(g, bestSubstructure);
+        for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
+            extendedStructures.addAll(Algorithms.getInstance().extendStructure(g, instance));
+        }
+        extendedStructures = new LinkedList<>(Utils.uniqueSetByGraphIsomorphism(extendedStructures));
 
-            List<DirectedGraph<StringVertex, StringEdge>> extendedStructures = new LinkedList<>();
-            List<DirectedGraph<StringVertex, StringEdge>> instances = Algorithms.getInstance().findInstances(g, bestSubstructure);
-            for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
-                extendedStructures.addAll(Algorithms.getInstance().extendStructure(g, instance));
-            }
-            extendedStructures = new LinkedList<>(Utils.uniqueSetByGraphIsomorphism(extendedStructures));
+        for (DirectedGraph<StringVertex, StringEdge> extendedStructure : extendedStructures) {
+            System.out.println("extendedStructure: " + extendedStructure);
+            float frequency = Algorithms.getInstance().findInstances(g, extendedStructure).size();
+            int probability = (int) (frequency / extendedStructures.size() * 100);
+            System.out.println("extension probability: " + probability + " %");
 
-            for (DirectedGraph<StringVertex, StringEdge> extendedStructure : extendedStructures) {
-                System.out.println("extendedStructure: " + extendedStructure);
-                float frequency = Algorithms.getInstance().findInstances(g, extendedStructure).size();
-                int probability = (int) (frequency / extendedStructures.size() * 100);
-                System.out.println("extension probability: " + probability + " %");
-
-                if (probability > 0 && probability < THRESHOLD) {
-                    anomalies.add(new Anomaly(probability, extendedStructure));
-                }
+            if (probability > 0 && probability < THRESHOLD) {
+                anomalies.add(new Anomaly(probability, extendedStructure));
             }
         }
 
-        Utils.sortAnomalies(anomalies);
         return anomalies;
     }
 }

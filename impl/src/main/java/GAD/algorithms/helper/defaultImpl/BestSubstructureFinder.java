@@ -62,10 +62,10 @@ public class BestSubstructureFinder implements IBestSubstructureFinder {
 
             childList.clear();
             parentList.clear();
-            System.out.println("Current substructure for extension size: " + Utils.calculateDescriptionLength(bestChild));
             if (bestChild != null && Utils.calculateDescriptionLength(bestChild) <= maxSubstructureSize) {
                 parentList.add(bestChild);
             }
+            System.out.println("Current substructure for extension size: " + Utils.calculateDescriptionLength(bestChild));
         }
 
         return new ArrayList<>(bestSubstructures.values());

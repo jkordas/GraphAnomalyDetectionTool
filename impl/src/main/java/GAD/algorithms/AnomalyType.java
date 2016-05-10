@@ -13,19 +13,19 @@ public enum AnomalyType {
     MODIFICATION {
         @Override
         public List<Anomaly> findAnomalies(DirectedGraph<StringVertex, StringEdge> graph) {
-            return GBAD_MDL.findAnomalies(graph);
+            return GBAD_MDL.getInstance().findAnomalies(graph);
         }
     },
     ADDITION {
         @Override
         public List<Anomaly> findAnomalies(DirectedGraph<StringVertex, StringEdge> graph) {
-            return GBAD_P.findAnomalies(graph);
+            return GBAD_P.getInstance().findAnomalies(graph);
         }
     },
     DELETION {
         @Override
         public List<Anomaly> findAnomalies(DirectedGraph<StringVertex, StringEdge> graph) {
-            return GBAD_MPS.findAnomalies(graph);
+            return GBAD_MPS.getInstance().findAnomalies(graph);
         }
     };
 

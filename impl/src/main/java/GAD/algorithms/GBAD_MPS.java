@@ -1,5 +1,6 @@
 package GAD.algorithms;
 
+import GAD.Config;
 import GAD.algorithms.helper.defaultImpl.Utils;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
@@ -11,44 +12,47 @@ import java.util.List;
 /**
  * Created by jkordas on 12/03/16.
  */
-public class GBAD_MPS {
-    //TODO: move params to config
-    private static final int THRESHOLD = 10;
-    private static final int BEST_SUBSTRUCTURES_LIMIT = 1;
+public class GBAD_MPS extends GBAD_Algorithm {
+    private static final int THRESHOLD = Config.getInstance().GBAD_MPS_THRESHOLD;
 
-    public static List<Anomaly> findAnomalies(DirectedGraph<StringVertex, StringEdge> g) {
+    private static GBAD_MPS ourInstance = new GBAD_MPS();
+
+    public static GBAD_MPS getInstance() {
+        return ourInstance;
+    }
+
+    private GBAD_MPS() {
+    }
+
+    @Override
+    List<Anomaly> findAnomaliesForSubstructure(DirectedGraph<StringVertex, StringEdge> g,
+                                               DirectedGraph<StringVertex, StringEdge> bestSubstructure) {
         List<Anomaly> anomalies = new LinkedList<>();
-        List<DirectedGraph<StringVertex, StringEdge>> bestSubstructures = Algorithms.getInstance().bestSubstructures(g,
-                BEST_SUBSTRUCTURES_LIMIT);
 
-        for (DirectedGraph<StringVertex, StringEdge> bestSubstructure : bestSubstructures) {
-            System.out.println("bestSubstructure: " + bestSubstructure);
+        List<DirectedGraph<StringVertex, StringEdge>> bestSubstructureInstances = Algorithms.getInstance().findInstances(g,
+                bestSubstructure);
+        List<DirectedGraph<StringVertex, StringEdge>> includedSubstructures = Algorithms.getInstance().includedSubstructures(
+                bestSubstructure);
 
-            List<DirectedGraph<StringVertex, StringEdge>> bestSubstructureInstances = Algorithms.getInstance().findInstances(g, bestSubstructure);
-            List<DirectedGraph<StringVertex, StringEdge>> includedSubstructures = Algorithms.getInstance().includedSubstructures
-                    (bestSubstructure);
+        List<DirectedGraph<StringVertex, StringEdge>> instances = new LinkedList<>();
+        for (DirectedGraph<StringVertex, StringEdge> includedSubstructure : includedSubstructures) {
+            instances.addAll(Algorithms.getInstance().findInstances(g, includedSubstructure));
+        }
 
-            List<DirectedGraph<StringVertex, StringEdge>> instances = new LinkedList<>();
-            for (DirectedGraph<StringVertex, StringEdge> includedSubstructure : includedSubstructures) {
-                instances.addAll(Algorithms.getInstance().findInstances(g, includedSubstructure));
-            }
+        for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
+            System.out.println("instance: " + instance);
+            if (!Utils.containsSubstructure(bestSubstructureInstances, instance)) {
+                int frequency = Algorithms.getInstance().findInstances(g, instance).size() - bestSubstructureInstances.size();
+                int cost = Algorithms.getInstance().subgraphTransformationCost(instance, bestSubstructure);
 
-            for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
-                System.out.println("instance: " + instance);
-                if(!Utils.containsSubstructure(bestSubstructureInstances, instance)) {
-                    int frequency = Algorithms.getInstance().findInstances(g, instance).size() - bestSubstructureInstances.size();
-                    int cost = Algorithms.getInstance().subgraphTransformationCost(instance, bestSubstructure);
-
-                    int anomalyValue = frequency * cost;
-                    System.out.println(anomalyValue);
-                    if (anomalyValue > 0 && anomalyValue < THRESHOLD) {
-                        anomalies.add(new Anomaly(anomalyValue, instance));
-                    }
+                int anomalyValue = frequency * cost;
+                System.out.println(anomalyValue);
+                if (anomalyValue > 0 && anomalyValue < THRESHOLD) {
+                    anomalies.add(new Anomaly(anomalyValue, instance));
                 }
             }
         }
 
-        Utils.sortAnomalies(anomalies);
         return anomalies;
     }
 }

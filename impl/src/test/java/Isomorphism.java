@@ -1,5 +1,4 @@
 import GAD.algorithms.Algorithms;
-import GAD.algorithms.helper.defaultImpl.IsomorphismDetector;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import org.jgrapht.DirectedGraph;
@@ -38,8 +37,29 @@ public class Isomorphism {
         assertEquals(false, Algorithms.getInstance().isIsomorphic(g1, g2));
     }
 
+    @Test
+    public void simpleTopologyTest() {
+        DirectedGraph<StringVertex, StringEdge> g1 = new SimpleDirectedGraph<>(StringEdge.class);
+        DirectedGraph<StringVertex, StringEdge> g2 = new SimpleDirectedGraph<>(StringEdge.class);
 
-    //TODO add topology isomorphism detector
+        StringVertex a = new StringVertex("A");
+        StringVertex b = new StringVertex("B");
+        g1.addVertex(a);
+        g1.addVertex(b);
+        g1.addEdge(a, b);
 
+        StringVertex a2 = new StringVertex("C");
+        StringVertex b2 = new StringVertex("D");
+        g2.addVertex(b2);
+        g2.addVertex(a2);
+        StringEdge e2 = new StringEdge("");
+        g2.addEdge(a2, b2, e2);
+
+
+        assertEquals(true, Algorithms.getInstance().isTopologicallyIsomorphic(g1, g2));
+
+        g1.addVertex(new StringVertex("C"));
+        assertEquals(false, Algorithms.getInstance().isTopologicallyIsomorphic(g1, g2));
+    }
 
 }

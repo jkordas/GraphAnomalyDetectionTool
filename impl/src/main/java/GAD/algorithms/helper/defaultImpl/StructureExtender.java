@@ -97,7 +97,7 @@ public class StructureExtender implements IStructureExtender {
                 }
             }
         }
-        //TODO absentEdges may contain duplicates, but it shouldnt break anything
+        //NOTE: absentEdges may contain duplicates, but it should not break anything
 
         return absentEdges;
     }

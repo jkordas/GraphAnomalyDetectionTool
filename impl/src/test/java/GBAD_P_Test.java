@@ -1,5 +1,6 @@
+import GAD.AnomalyDetector;
 import GAD.algorithms.Anomaly;
-import GAD.algorithms.GBAD_P;
+import GAD.algorithms.AnomalyType;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import GAD.io.GraphReader;
@@ -18,7 +19,7 @@ public class GBAD_P_Test {
     public void simpleTest() {
         DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/PGraph.csv");
 
-        List<Anomaly> anomalies = GBAD_P.findAnomalies(g);
+        List<Anomaly> anomalies = AnomalyDetector.findAnomalies(AnomalyType.ADDITION, g);
         assertEquals(3, anomalies.size());
     }
 }

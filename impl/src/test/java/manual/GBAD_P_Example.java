@@ -17,7 +17,7 @@ public class GBAD_P_Example {
 //        DirectedGraph<StringVertex, StringEdge> g = manual.TestUtils.createCompressGraph();
         DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/PGraph.csv");
 
-        List<Anomaly> anomalies = GBAD_P.findAnomalies(g);
+        List<Anomaly> anomalies = GBAD_P.getInstance().findAnomalies(g);
         anomalies.sort((a, b) -> a.getValue() < b.getValue() ? -1 : a.getValue() == b.getValue() ? 0 : 1);
 
         for (Anomaly anomaly : anomalies) {
