@@ -26,6 +26,6 @@ public class Anomaly {
 
     @Override
     public String toString() {
-        return "Anomaly value: " + getValue() + "/nStructure: " + getStructure();
+        return "Anomaly value: " + getValue() + "\nStructure: " + getStructure();
     }
 }
