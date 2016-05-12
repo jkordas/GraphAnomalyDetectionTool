@@ -1,3 +1,5 @@
+package automatic;
+
 import GAD.algorithms.utils.CombinationGenerator;
 import GAD.algorithms.utils.PermutationGenerator;
 import org.junit.Test;

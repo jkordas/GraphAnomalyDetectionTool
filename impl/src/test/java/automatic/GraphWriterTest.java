@@ -1,3 +1,5 @@
+package automatic;
+
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import GAD.io.GraphReader;

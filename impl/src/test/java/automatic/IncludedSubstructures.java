@@ -1,3 +1,5 @@
+package automatic;
+
 import GAD.algorithms.Algorithms;
 import GAD.algorithms.helper.defaultImpl.IncludedSubstructuresFinder;
 import GAD.graph.StringEdge;

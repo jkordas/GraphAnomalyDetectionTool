@@ -1,5 +1,8 @@
+package automatic;
+
+import GAD.AnomalyDetector;
 import GAD.algorithms.Anomaly;
-import GAD.algorithms.GBAD_MDL;
+import GAD.algorithms.AnomalyType;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import GAD.io.GraphReader;
@@ -13,12 +16,12 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by jkordas on 12/03/16.
  */
-public class GBAD_MDL_Test {
+public class GBAD_P_Test {
     @Test
     public void simpleTest() {
-        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/MDLGraph.csv");
+        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/PGraph.csv");
 
-        List<Anomaly> anomalies = GBAD_MDL.getInstance().findAnomalies(g);
+        List<Anomaly> anomalies = AnomalyDetector.findAnomalies(AnomalyType.ADDITION, g);
         assertEquals(3, anomalies.size());
     }
 }

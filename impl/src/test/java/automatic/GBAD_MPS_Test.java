@@ -1,3 +1,5 @@
+package automatic;
+
 import GAD.algorithms.Anomaly;
 import GAD.algorithms.GBAD_MPS;
 import GAD.graph.StringEdge;

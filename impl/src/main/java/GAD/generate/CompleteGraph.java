@@ -18,7 +18,6 @@ import java.util.List;
  */
 public class CompleteGraph {
     private static CompleteGraphGenerator<StringVertex, StringEdge> completeGraphGenerator = new CompleteGraphGenerator<>(4);
-    private static int counter = 0;
 
     public static void main(String[] args) {
         long startTime = System.nanoTime();
@@ -33,29 +32,15 @@ public class CompleteGraph {
         DirectedGraph<StringVertex, StringEdge> target7 = new SimpleDirectedGraph<>(StringEdge.class);
         DirectedGraph<StringVertex, StringEdge> target8 = new SimpleDirectedGraph<>(StringEdge.class);
 
-        VertexFactory<StringVertex> vertexFactory = new VertexFactory<StringVertex>() {
 
-            @Override
-            public StringVertex createVertex() {
-                return new StringVertex(++counter + "");
-            }
-        };
-
-        completeGraphGenerator.generateGraph(target1, vertexFactory, null);
-        counter = 0;
-        completeGraphGenerator.generateGraph(target2, vertexFactory, null);
-        counter = 0;
-        completeGraphGenerator.generateGraph(target3, vertexFactory, null);
-        counter = 0;
-        completeGraphGenerator.generateGraph(target4, vertexFactory, null);
-        counter = 0;
-        completeGraphGenerator.generateGraph(target5, vertexFactory, null);
-        counter = 0;
-        completeGraphGenerator.generateGraph(target6, vertexFactory, null);
-        counter = 0;
-        completeGraphGenerator.generateGraph(target7, vertexFactory, null);
-        counter = 0;
-        completeGraphGenerator.generateGraph(target8, vertexFactory, null);
+        completeGraphGenerator.generateGraph(target1, Factory.createVertexFactory(), null);
+        completeGraphGenerator.generateGraph(target2, Factory.createVertexFactory(), null);
+        completeGraphGenerator.generateGraph(target3, Factory.createVertexFactory(), null);
+        completeGraphGenerator.generateGraph(target4, Factory.createVertexFactory(), null);
+        completeGraphGenerator.generateGraph(target5, Factory.createVertexFactory(), null);
+        completeGraphGenerator.generateGraph(target6, Factory.createVertexFactory(), null);
+        completeGraphGenerator.generateGraph(target7, Factory.createVertexFactory(), null);
+        completeGraphGenerator.generateGraph(target8, Factory.createVertexFactory(), null);
 
         StringVertex source = target1.vertexSet().iterator().next();
         source.setLabel("A");
