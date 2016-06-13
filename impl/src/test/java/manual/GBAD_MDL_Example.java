@@ -15,7 +15,7 @@ import java.util.List;
 public class GBAD_MDL_Example {
     public static void main(String[] args) {
 //        DirectedGraph<StringVertex, StringEdge> g = manual.TestUtils.createCompressGraph();
-        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/MDLGraph.csv");
+        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("impl/graphModels/MDLGraph.csv");
 
         List<Anomaly> anomalies = GBAD_MDL.getInstance().findAnomalies(g);
         anomalies.sort((a, b) -> a.getValue() < b.getValue() ? -1 : a.getValue() == b.getValue() ? 0 : 1);

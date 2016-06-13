@@ -17,6 +17,9 @@ import java.util.Set;
 public class Utils {
 
     public static int calculateDescriptionLength(DirectedGraph<StringVertex, StringEdge> graph) {
+        if(graph == null) {
+            return 0;
+        }
         return graph.edgeSet().size() + graph.vertexSet().size();
     }
 

@@ -27,6 +27,7 @@ public class GBAD_MPS extends GBAD_Algorithm {
     @Override
     List<Anomaly> findAnomaliesForSubstructure(DirectedGraph<StringVertex, StringEdge> g,
                                                DirectedGraph<StringVertex, StringEdge> bestSubstructure) {
+        System.out.println("Looking for DELETIONS in graph considering substructure: " + bestSubstructure);
         List<Anomaly> anomalies = new LinkedList<>();
 
         List<DirectedGraph<StringVertex, StringEdge>> bestSubstructureInstances = Algorithms.getInstance().findInstances(g,
@@ -48,7 +49,7 @@ public class GBAD_MPS extends GBAD_Algorithm {
                 int anomalyValue = frequency * cost;
                 System.out.println(anomalyValue);
                 if (anomalyValue > 0 && anomalyValue < THRESHOLD) {
-                    anomalies.add(new Anomaly(anomalyValue, instance));
+                    anomalies.add(new Anomaly(AnomalyType.DELETION, anomalyValue, instance));
                 }
             }
         }

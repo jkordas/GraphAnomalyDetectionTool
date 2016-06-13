@@ -15,7 +15,7 @@ public class Config {
     private Config() {
     }
 
-    public final int MAX_SUBSTRUCTURE_SIZE = 18;
+    public final int MAX_SUBSTRUCTURE_SIZE = 10;
     public final int BEST_SUBSTRUCTURES_LIMIT = 1;
     public final int GBAD_P_THRESHOLD = 20;
     public final int GBAD_MDL_THRESHOLD = 10;

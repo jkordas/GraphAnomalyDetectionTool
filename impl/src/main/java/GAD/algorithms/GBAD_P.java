@@ -27,6 +27,7 @@ public class GBAD_P extends GBAD_Algorithm {
     @Override
     List<Anomaly> findAnomaliesForSubstructure(DirectedGraph<StringVertex, StringEdge> g,
                                                DirectedGraph<StringVertex, StringEdge> bestSubstructure) {
+        System.out.println("Looking for ADDITIONS in graph considering substructure: " + bestSubstructure);
         List<Anomaly> anomalies = new LinkedList<>();
 
         List<DirectedGraph<StringVertex, StringEdge>> extendedStructures = new LinkedList<>();
@@ -43,7 +44,7 @@ public class GBAD_P extends GBAD_Algorithm {
             System.out.println("extension probability: " + probability + " %");
 
             if (probability > 0 && probability < THRESHOLD) {
-                anomalies.add(new Anomaly(probability, extendedStructure));
+                anomalies.add(new Anomaly(AnomalyType.ADDITION, probability, extendedStructure));
             }
         }
 

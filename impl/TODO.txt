@@ -6,10 +6,15 @@ Wygenerowac rozne grafy do testow:
 * grid
 ...
 
+- do analizy:
+    czas dzialania - proba okreslenia zlozonosci
+
 zastanowic sie czy DeepCopy jest potrzebne
 
 
-//liczba wierzcholkow
+//csv input file format
 ID ETYKIETA
-//liczba krawedzi
+...
+EDGES
 ZRODLO.ID CEL.ID ETYKIETA
+...

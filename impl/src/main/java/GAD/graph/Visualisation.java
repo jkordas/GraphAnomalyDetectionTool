@@ -13,10 +13,7 @@ public class Visualisation
         extends JApplet {
 
     private Graph<StringVertex, StringEdge> graph;
-    private static final long serialVersionUID = 2202072534703043194L;
     private static final Dimension DEFAULT_SIZE = new Dimension(530, 320);
-
-    private JGraphXAdapter<StringVertex, StringEdge> jgxAdapter;
 
     public Visualisation(Graph<StringVertex, StringEdge> graph)
     {
@@ -28,7 +25,7 @@ public class Visualisation
         JFrame frame = new JFrame();
         frame.getContentPane().add(this);
         frame.setTitle("JGraphT Adapter to JGraph Demo");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
@@ -39,7 +36,7 @@ public class Visualisation
     public void init()
     {
         // create a visualization using JGraph, via an adapter
-        jgxAdapter = new JGraphXAdapter<>(graph);
+        JGraphXAdapter<StringVertex, StringEdge> jgxAdapter = new JGraphXAdapter<>(graph);
 
         getContentPane().add(new mxGraphComponent(jgxAdapter));
         resize(DEFAULT_SIZE);
