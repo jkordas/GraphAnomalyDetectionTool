@@ -6,6 +6,7 @@ import com.opencsv.CSVReader;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,13 +18,17 @@ import java.util.List;
  */
 public class GraphReader {
     public static DirectedGraph<StringVertex, StringEdge> parse(String filePath) {
+        return parse(new File(filePath));
+    }
+
+    public static DirectedGraph<StringVertex, StringEdge> parse(File file) {
         CSVReader reader = null;
         try {
-            reader = new CSVReader(new FileReader(filePath));
+            reader = new CSVReader(new FileReader(file));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        String [] nextLine;
+        String[] nextLine;
         DirectedGraph<StringVertex, StringEdge> graph = new SimpleDirectedGraph<>(StringEdge.class);
         List<StringVertex> vertices = new ArrayList<>();
         vertices.add(null);//we start numbering ids from one
@@ -37,7 +42,7 @@ public class GraphReader {
 
             while ((nextLine = reader.readNext()) != null) {
                 String label = "";
-                if(nextLine.length > 2) {
+                if (nextLine.length > 2) {
                     label = nextLine[2].trim();
                 }
                 StringEdge edge = new StringEdge(label);
