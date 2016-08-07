@@ -15,10 +15,10 @@ import java.util.List;
 public class GBAD_MPS extends GBAD_Algorithm {
     private static final int THRESHOLD = Config.getInstance().GBAD_MPS_THRESHOLD;
 
-    private static GBAD_MPS ourInstance = new GBAD_MPS();
+    private static GBAD_MPS instance = new GBAD_MPS();
 
     public static GBAD_MPS getInstance() {
-        return ourInstance;
+        return instance;
     }
 
     private GBAD_MPS() {
@@ -54,6 +54,8 @@ public class GBAD_MPS extends GBAD_Algorithm {
             }
         }
 
+        //filter to get only most outer structure
+        anomalies = Utils.uniqueListBySubgraphIsomorphism(anomalies);
         return anomalies;
     }
 }

@@ -14,10 +14,10 @@ import java.util.List;
 public class GBAD_MDL extends GBAD_Algorithm {
     private static final int THRESHOLD = Config.getInstance().GBAD_MDL_THRESHOLD;
 
-    private static GBAD_MDL ourInstance = new GBAD_MDL();
+    private static GBAD_MDL instance = new GBAD_MDL();
 
     public static GBAD_MDL getInstance() {
-        return ourInstance;
+        return instance;
     }
 
     private GBAD_MDL() {
@@ -33,11 +33,11 @@ public class GBAD_MDL extends GBAD_Algorithm {
 
         for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
             System.out.println("instance: " + instance);
-            int frequency = Algorithms.getInstance().findInstances(g, instance).size();
             int cost = Algorithms.getInstance().transformationCost(instance, bestSubstructure);
 
-            int anomalyValue = frequency * cost;
-            if (anomalyValue > 0 && anomalyValue < THRESHOLD) {
+            if (cost > 0 && cost <= THRESHOLD) {
+                int frequency = Algorithms.getInstance().findInstances(g, instance).size();
+                int anomalyValue = frequency * cost;
                 anomalies.add(new Anomaly(AnomalyType.MODIFICATION, anomalyValue, instance));
             }
         }

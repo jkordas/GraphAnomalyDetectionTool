@@ -15,11 +15,12 @@ public class Config {
     private Config() {
     }
 
-    public final int MAX_SUBSTRUCTURE_SIZE = 10;
-    public final int BEST_SUBSTRUCTURES_LIMIT = 1;
-    public final int GBAD_P_THRESHOLD = 20;
-    public final int GBAD_MDL_THRESHOLD = 10;
-    public final int GBAD_MPS_THRESHOLD = 10;
+    //NOTE: How to better handle config parameters change in tests? If fields were final it isn't possible.
+    public int MAX_SUBSTRUCTURE_SIZE = 8;
+    public int BEST_SUBSTRUCTURES_LIMIT = 1;
+    public int GBAD_P_THRESHOLD = 20;
+    public int GBAD_MDL_THRESHOLD = 10;
+    public int GBAD_MPS_THRESHOLD = 10;
 
     public final IBestSubstructureFinder BEST_SUBSTRUCTURE_FINDER = new BestSubstructureFinder();
     public final ICompressor COMPRESSOR = new Compressor();

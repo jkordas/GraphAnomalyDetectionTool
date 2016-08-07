@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 public class GBAD_MPS_Test {
     @Test
     public void simpleTest() {
-        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/MPSGraph.csv");
+        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/MPSGraphPublication.csv");
 
         List<Anomaly> anomalies = GBAD_MPS.getInstance().findAnomalies(g);
         assertEquals(1, anomalies.size());

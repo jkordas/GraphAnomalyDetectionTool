@@ -15,10 +15,10 @@ import java.util.List;
 public class GBAD_P extends GBAD_Algorithm {
     private static final int THRESHOLD = Config.getInstance().GBAD_P_THRESHOLD;
 
-    private static GBAD_P ourInstance = new GBAD_P();
+    private static GBAD_P instance = new GBAD_P();
 
     public static GBAD_P getInstance() {
-        return ourInstance;
+        return instance;
     }
 
     private GBAD_P() {
@@ -35,12 +35,13 @@ public class GBAD_P extends GBAD_Algorithm {
         for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
             extendedStructures.addAll(Algorithms.getInstance().extendStructure(g, instance));
         }
+        int extendedStructuresNumber = extendedStructures.size();
         extendedStructures = new LinkedList<>(Utils.uniqueSetByGraphIsomorphism(extendedStructures));
 
         for (DirectedGraph<StringVertex, StringEdge> extendedStructure : extendedStructures) {
             System.out.println("extendedStructure: " + extendedStructure);
             float frequency = Algorithms.getInstance().findInstances(g, extendedStructure).size();
-            int probability = (int) (frequency / extendedStructures.size() * 100);
+            int probability = (int) (frequency / extendedStructuresNumber * 100);
             System.out.println("extension probability: " + probability + " %");
 
             if (probability > 0 && probability < THRESHOLD) {

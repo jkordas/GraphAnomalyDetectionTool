@@ -19,9 +19,9 @@ import static org.junit.Assert.assertEquals;
 public class GBAD_P_Test {
     @Test
     public void simpleTest() {
-        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/PGraph.csv");
+        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/PGraphPublication.csv");
 
         List<Anomaly> anomalies = AnomalyDetector.findAnomalies(AnomalyType.ADDITION, g);
-        assertEquals(3, anomalies.size());
+        assertEquals(6, anomalies.size());
     }
 }

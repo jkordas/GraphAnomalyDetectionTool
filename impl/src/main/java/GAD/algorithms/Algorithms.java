@@ -77,6 +77,11 @@ public class Algorithms implements IBestSubstructureFinder, ICompressor, IInclud
     }
 
     @Override
+    public boolean isSubgraphIsomorphic(Graph<StringVertex, StringEdge> g, Graph<StringVertex, StringEdge> s) {
+        return isomorphismDetector.isSubgraphIsomorphic(g, s);
+    }
+
+    @Override
     public List<DirectedGraph<StringVertex, StringEdge>> extendStructure(Graph<StringVertex, StringEdge> g, Graph<StringVertex,
             StringEdge> s) {
         return structureExtender.extendStructure(g, s);

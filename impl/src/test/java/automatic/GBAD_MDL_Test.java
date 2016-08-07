@@ -1,5 +1,6 @@
 package automatic;
 
+import GAD.Config;
 import GAD.algorithms.Anomaly;
 import GAD.algorithms.GBAD_MDL;
 import GAD.graph.StringEdge;
@@ -20,6 +21,7 @@ public class GBAD_MDL_Test {
     public void simpleTest() {
         DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/MDLGraph.csv");
 
+        Config.getInstance().MAX_SUBSTRUCTURE_SIZE = 8;
         List<Anomaly> anomalies = GBAD_MDL.getInstance().findAnomalies(g);
         assertEquals(3, anomalies.size());
     }

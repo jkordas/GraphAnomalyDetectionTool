@@ -11,4 +11,6 @@ public interface IIsomorphismDetector {
     boolean isIsomorphic(Graph<StringVertex, StringEdge> g1, Graph<StringVertex, StringEdge> g2);
 
     boolean isTopologicallyIsomorphic(Graph<StringVertex, StringEdge> g1, Graph<StringVertex, StringEdge> g2);
+
+    boolean isSubgraphIsomorphic(Graph<StringVertex, StringEdge> g, Graph<StringVertex, StringEdge> s);
 }

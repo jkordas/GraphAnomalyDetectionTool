@@ -22,8 +22,7 @@ public class GBAD_MDL_Example {
 
         for (Anomaly anomaly : anomalies) {
             System.out.println("--------");
-            System.out.println(anomaly.getValue());
-            System.out.println(anomaly.getStructure());
+            System.out.println(anomaly);
         }
     }
 }

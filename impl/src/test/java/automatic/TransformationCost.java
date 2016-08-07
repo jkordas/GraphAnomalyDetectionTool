@@ -38,10 +38,10 @@ public class TransformationCost {
         assertEquals(Algorithms.getInstance().transformationCost(g1, g2), 0);
 
         g2.addEdge(vs1, vs3);
-        assertEquals(Algorithms.getInstance().transformationCost(g1, g2), 2);
+        assertEquals(Algorithms.getInstance().transformationCost(g1, g2), 1);
 
         vs1.setLabel("4");
-        assertEquals(Algorithms.getInstance().transformationCost(g1, g2), 3);
+        assertEquals(Algorithms.getInstance().transformationCost(g1, g2), 2);
     }
 
     @Test
@@ -75,6 +75,6 @@ public class TransformationCost {
         assertEquals(Algorithms.getInstance().transformationCost(g1, g2), 0);
 
         g2.addEdge(vs4, vs1);
-        assertEquals(Algorithms.getInstance().transformationCost(g1, g2), 2);
+        assertEquals(Algorithms.getInstance().transformationCost(g1, g2), 1);
     }
 }

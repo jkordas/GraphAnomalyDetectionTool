@@ -62,8 +62,7 @@ public class TransformationCostCalculator implements ITransformationCostCalculat
         //assume s is subgraph of g
 
         //missing edge/vertex +1
-        //missing edge/vertex label +1
-        return 2 * (g.vertexSet().size() - s.vertexSet().size() + g.edgeSet().size() - s.edgeSet().size());
+        return (g.vertexSet().size() - s.vertexSet().size() + g.edgeSet().size() - s.edgeSet().size());
     }
 
     private int getEdgesCost(Set<StringEdge> edgeSet, DefaultGraphMapping<StringVertex, StringEdge> mapping, boolean forward) {
@@ -75,7 +74,10 @@ public class TransformationCostCalculator implements ITransformationCostCalculat
                     cost++;
                 }
             } else {
-                cost += 2;
+                cost++; //edge with no label generates cost = 1;
+                if(edge.getLabel().length() > 0) {
+                    cost++;
+                }
             }
         }
         return cost;

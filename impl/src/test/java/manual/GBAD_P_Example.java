@@ -4,6 +4,7 @@ import GAD.algorithms.Anomaly;
 import GAD.algorithms.GBAD_P;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
+import GAD.graph.Visualisation;
 import GAD.io.GraphReader;
 import org.jgrapht.DirectedGraph;
 
@@ -14,16 +15,14 @@ import java.util.List;
  */
 public class GBAD_P_Example {
     public static void main(String[] args) {
-//        DirectedGraph<StringVertex, StringEdge> g = manual.TestUtils.createCompressGraph();
-        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/PGraph.csv");
+        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/PGraphVertices.csv");
+        new Visualisation(g).showGraph();
 
         List<Anomaly> anomalies = GBAD_P.getInstance().findAnomalies(g);
-        anomalies.sort((a, b) -> a.getValue() < b.getValue() ? -1 : a.getValue() == b.getValue() ? 0 : 1);
 
         for (Anomaly anomaly : anomalies) {
             System.out.println("--------");
-            System.out.println(anomaly.getValue());
-            System.out.println(anomaly.getStructure());
+            System.out.println(anomaly);
         }
     }
 }

@@ -34,10 +34,11 @@ public class InstanceFinder implements IInstanceFinder {
         while (combinationGenerator.hasNext()) {
             Set<StringVertex> loadedVertices = Utils.loadVertices(gVertices, combinationGenerator.next());
             Set<StringEdge> loadedEdges = Utils.loadEdges(g, loadedVertices);
+
             DirectedSubgraph<StringVertex, StringEdge> loadedGraph = new DirectedSubgraph<>(g, loadedVertices, loadedEdges);
 
             if (exactMatch) {
-                if (Algorithms.getInstance().isIsomorphic(loadedGraph, s)) {
+                if (Algorithms.getInstance().isSubgraphIsomorphic(loadedGraph, s)) {
                     instanceList.add(loadedGraph);
                 }
             } else {
@@ -45,6 +46,7 @@ public class InstanceFinder implements IInstanceFinder {
                     instanceList.add(loadedGraph);
                 }
             }
+
         }
 
         return instanceList;

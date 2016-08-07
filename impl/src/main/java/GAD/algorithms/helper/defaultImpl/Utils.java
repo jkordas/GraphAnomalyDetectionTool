@@ -8,6 +8,7 @@ import org.jgrapht.DirectedGraph;
 import org.jgrapht.alg.ConnectivityInspector;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -67,10 +68,21 @@ public class Utils {
         for (DirectedGraph<StringVertex, StringEdge> substructureInstance : substructureInstances) {
             Set<StringVertex> intersection = new HashSet<>(substructureInstance.vertexSet()); // use the copy constructor
             intersection.retainAll(instance.vertexSet());
-            if (intersection.size() > 0) {
+            if (intersection.size() == instance.vertexSet().size()) {
                 return true;
             }
         }
+        return false;
+    }
+
+    public static boolean containsSubstructure(DirectedGraph<StringVertex, StringEdge> substructureInstance,
+                                               DirectedGraph<StringVertex, StringEdge> instance) {
+        Set<StringVertex> intersection = new HashSet<>(substructureInstance.vertexSet()); // use the copy constructor
+        intersection.retainAll(instance.vertexSet());
+        if (intersection.size() == instance.vertexSet().size()) {
+            return true;
+        }
+
         return false;
     }
 
@@ -102,5 +114,28 @@ public class Utils {
 
     public static void sortAnomalies(List<Anomaly> anomalies) {
         anomalies.sort((a, b) -> a.getValue() < b.getValue() ? -1 : a.getValue() == b.getValue() ? 0 : 1);
+    }
+
+    public static List<Anomaly> uniqueListBySubgraphIsomorphism(List<Anomaly> anomalies) {
+        LinkedList<Anomaly> uniqueAnomalies = new LinkedList<>();
+
+        for (Anomaly anomaly : anomalies) {
+            boolean shouldBeAdded = true;
+            for (Anomaly testAnomaly : anomalies) {
+                if (anomaly != testAnomaly) {
+                    if (containsSubstructure(testAnomaly.getStructure(), anomaly.getStructure()) && Algorithms.getInstance()
+                            .isSubgraphIsomorphic(testAnomaly.getStructure(), anomaly.getStructure())) {
+
+                        shouldBeAdded = false;
+                        break;
+                    }
+                }
+            }
+            if (shouldBeAdded) {
+                uniqueAnomalies.add(anomaly);
+            }
+
+        }
+        return uniqueAnomalies;
     }
 }
