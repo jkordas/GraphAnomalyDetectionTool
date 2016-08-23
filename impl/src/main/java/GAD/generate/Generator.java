@@ -2,7 +2,7 @@ package GAD.generate;
 
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
-import GAD.graph.Visualisation;
+import GAD.io.Visualisation;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.Graphs;
 import org.jgrapht.generate.GraphGenerator;

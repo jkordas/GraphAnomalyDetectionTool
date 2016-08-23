@@ -15,7 +15,7 @@ import java.util.*;
  */
 public class BestSubstructureFinder implements IBestSubstructureFinder {
     public List<DirectedGraph<StringVertex, StringEdge>> bestSubstructures(DirectedGraph<StringVertex, StringEdge> graph, int limit) {
-        int maxSubstructureSize = Config.getInstance().MAX_SUBSTRUCTURE_SIZE;
+        final int MAX_SUBSTRUCTURE_SIZE = Config.getInstance().MAX_SUBSTRUCTURE_SIZE;
         List<DirectedGraph<StringVertex, StringEdge>> parentList = new LinkedList<>();
         List<DirectedGraph<StringVertex, StringEdge>> childList = new LinkedList<>();
         SortedMap<Integer, DirectedGraph<StringVertex, StringEdge>> bestSubstructures = new TreeMap<>();
@@ -29,6 +29,8 @@ public class BestSubstructureFinder implements IBestSubstructureFinder {
 
         System.out.println("Best substructure search...");
         while (!parentList.isEmpty()) {
+            System.out.println("Current substructure for extension size: " + Utils.calculateDescriptionLength(parentList.get(0)));
+
             DirectedGraph<StringVertex, StringEdge> bestChild = null;
             int bestChildDLValue = Integer.MAX_VALUE;
 
@@ -62,10 +64,9 @@ public class BestSubstructureFinder implements IBestSubstructureFinder {
 
             childList.clear();
             parentList.clear();
-            if (bestChild != null && Utils.calculateDescriptionLength(bestChild) <= maxSubstructureSize) {
+            if (bestChild != null && Utils.calculateDescriptionLength(bestChild) <= MAX_SUBSTRUCTURE_SIZE) {
                 parentList.add(bestChild);
             }
-            System.out.println("Current substructure for extension size: " + Utils.calculateDescriptionLength(bestChild));
         }
 
         return new ArrayList<>(bestSubstructures.values());

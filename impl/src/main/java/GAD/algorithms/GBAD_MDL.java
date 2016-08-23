@@ -34,10 +34,10 @@ public class GBAD_MDL extends GBAD_Algorithm {
         for (DirectedGraph<StringVertex, StringEdge> instance : instances) {
             System.out.println("instance: " + instance);
             int cost = Algorithms.getInstance().transformationCost(instance, bestSubstructure);
+            int frequency = Algorithms.getInstance().findInstances(g, instance).size();
 
-            if (cost > 0 && cost <= THRESHOLD) {
-                int frequency = Algorithms.getInstance().findInstances(g, instance).size();
-                int anomalyValue = frequency * cost;
+            int anomalyValue = frequency * cost;
+            if (anomalyValue > 0 && anomalyValue <= THRESHOLD) {
                 anomalies.add(new Anomaly(AnomalyType.MODIFICATION, anomalyValue, instance));
             }
         }

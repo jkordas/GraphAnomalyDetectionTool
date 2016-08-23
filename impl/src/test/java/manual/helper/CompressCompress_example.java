@@ -3,7 +3,7 @@ package manual.helper;
 import GAD.algorithms.Algorithms;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
-import GAD.graph.Visualisation;
+import GAD.io.Visualisation;
 import manual.TestUtils;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.SimpleDirectedGraph;

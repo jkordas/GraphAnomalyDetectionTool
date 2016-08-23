@@ -6,7 +6,7 @@ import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
 import com.opencsv.CSVWriter;
 import org.jgrapht.DirectedGraph;
-import org.jgrapht.generate.RingGraphGenerator;
+import org.jgrapht.generate.CompleteGraphGenerator;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,17 +15,17 @@ import java.util.List;
 /**
  * Created by jkordas on 07/08/16.
  */
-public class PatternSearchRing {
+public class PatternSearchComplete {
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
-        new PatternSearchRing().calculate();
+        new PatternSearchComplete().calculate();
 
     }
 
     public void calculate() throws IOException {
-        String csv = "performanceResults/patternSearchRing_3.csv";
+        String csv = "performanceResults/patternSearchComplete_5.csv";
         CSVWriter writer = new CSVWriter(new FileWriter(csv));
 
         String [] header = " ,3,4,5,6,7,8,9,10,11,12,13,14,15".split(",");
@@ -33,17 +33,18 @@ public class PatternSearchRing {
 
         int randomVerticesInsertNumber = 10;
 
-        for (int i = 3; i < 4; i++) {
+        for (int i = 5; i < 6; i++) {
             String result = "substructures number: " + i;
 
             for (int j = 3; j < 16; j++) {
-                Generator g = new Generator(i, new RingGraphGenerator<>(j), null, null, randomVerticesInsertNumber);
+                Generator g = new Generator(i, new CompleteGraphGenerator<>(j), null, null, randomVerticesInsertNumber);
 
                 long startTime = System.currentTimeMillis();
 
                 List<DirectedGraph<StringVertex, StringEdge>> bestSubstructures = Algorithms.getInstance().bestSubstructures(g.getResult(), 1);
                 long endTime   = System.currentTimeMillis();
                 long totalTime = endTime - startTime;
+
 
                 result = result + "," + totalTime;
 

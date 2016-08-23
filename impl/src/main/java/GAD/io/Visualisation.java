@@ -1,5 +1,7 @@
-package GAD.graph;
+package GAD.io;
 
+import GAD.graph.StringEdge;
+import GAD.graph.StringVertex;
 import com.mxgraph.layout.mxGraphLayout;
 import com.mxgraph.layout.mxOrganicLayout;
 import com.mxgraph.swing.mxGraphComponent;

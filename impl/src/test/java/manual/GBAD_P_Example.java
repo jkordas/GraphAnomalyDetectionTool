@@ -4,7 +4,7 @@ import GAD.algorithms.Anomaly;
 import GAD.algorithms.GBAD_P;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
-import GAD.graph.Visualisation;
+import GAD.io.Visualisation;
 import GAD.io.GraphReader;
 import org.jgrapht.DirectedGraph;
 

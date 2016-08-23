@@ -4,6 +4,7 @@ import GAD.algorithms.Anomaly;
 import GAD.algorithms.GBAD_MDL;
 import GAD.graph.StringEdge;
 import GAD.graph.StringVertex;
+import GAD.io.Visualisation;
 import GAD.io.GraphReader;
 import org.jgrapht.DirectedGraph;
 
@@ -15,7 +16,9 @@ import java.util.List;
 public class GBAD_MDL_Example {
     public static void main(String[] args) {
 //        DirectedGraph<StringVertex, StringEdge> g = manual.TestUtils.createCompressGraph();
-        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("impl/graphModels/MDLGraph.csv");
+        DirectedGraph<StringVertex, StringEdge> g = GraphReader.parse("graphModels/MDLGraph.csv");
+
+        new Visualisation(g).showGraph();
 
         List<Anomaly> anomalies = GBAD_MDL.getInstance().findAnomalies(g);
         anomalies.sort((a, b) -> a.getValue() < b.getValue() ? -1 : a.getValue() == b.getValue() ? 0 : 1);

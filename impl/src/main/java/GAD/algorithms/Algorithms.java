@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Algorithms implements IBestSubstructureFinder, ICompressor, IIncludedSubstructuresFinder, IInstanceFinder,
         IIsomorphismDetector, IStructureExtender, ITransformationCostCalculator {
-    private static Algorithms ourInstance = new Algorithms();
+    private static Algorithms instance = new Algorithms();
     private Config config = Config.getInstance();
 
     private IBestSubstructureFinder bestSubstructureFinder = config.BEST_SUBSTRUCTURE_FINDER;
@@ -26,7 +26,7 @@ public class Algorithms implements IBestSubstructureFinder, ICompressor, IInclud
     private ITransformationCostCalculator transformationCostCalculator = config.TRANSFORMATION_COST_CALCULATOR;
 
     public static Algorithms getInstance() {
-        return ourInstance;
+        return instance;
     }
 
     private Algorithms() {
